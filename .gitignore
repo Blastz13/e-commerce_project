@@ -1,0 +1,7 @@
+.idea
+__pycache__
+env
+Lib
+Scripts
+db.sqlite3
+media
