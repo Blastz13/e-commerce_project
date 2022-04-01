@@ -1,0 +1,13 @@
+<aside class="widget widget-tags">
+    <h3 class="sidebar-title">Tags</h3>
+    <ul>
+        {# all_tags, slug_selected_tag - the variables is taken from the inclusion tag is located in 'templatetags/filters_core.py' #}
+        {% for tag in  all_tags %}
+            {% if tag.slug == slug_selected_tag %}
+                <li style="color: red;"><a href="" style="color: red; border-color: red; pointer-events: none; cursor: default;">{{ tag.title }}</a></li>
+            {% else %}
+                <li><a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</aside>

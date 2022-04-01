@@ -1,0 +1,13 @@
+{% if not node.child.count %}
+      <li class=""><a href="{{ node.get_absolute_url_vertical }}">{{ node.title }}</a>
+{% else %}
+    <li class='has-sub'><span style="display: flex; justify-content: space-between;"><a href="{{ node.get_absolute_url_vertical }}"><span>{{ node.title }}</span></a> <span style="color: grey; cursor: pointer;">&equiv;</span> </span>
+    <ul class="sidebar-menu" id="css-menu">
+      {% for child in node.child.all %}
+        {% with node=child %}
+          {% include "shop/include_html/accordion-menu.html" %}
+        {% endwith %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+</li>

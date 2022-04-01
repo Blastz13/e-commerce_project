@@ -1,0 +1,56 @@
+{% extends 'shop/extends/base.html' %}
+{% load thumbnail %}
+{% block content %}
+    <div class="container" style="margin-top: 25px;">
+    <div class="row">
+<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+<div class="clear"></div>
+<div class="row">
+    <div class="list-view">
+        {% for order_item in order.order_items.all %}
+            <!-- single-product start -->
+            <div class="product-list-wrapper">
+                <div class="single-product">
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="product-img">
+                            <a href="">
+                                <img class="primary-image" src="{% thumbnail order_item.product.preview_image 480x606 crop='smart' %}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <div class="product-content">
+                            <h2 class="product-name"><a href="">{{ order_item.product.title }}</a></h2>
+                            <div class="price-box">
+                                    <span class="new-price">£{{ order_item.price }}</span>
+                            </div>
+                            <div class="product-desc">
+                                <p>{{ order_item.product.description|truncatewords:45 }}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- single-product end -->
+    {% endfor %}
+    </div>
+    </div>
+    </div>
+        <div class="col-md-5 col-sm-12 col-xs-12" style="margin-bottom: 15px;">
+        <div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Number order: {{ order.id}}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Date order: {{ order.date_create }}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Is paid: {% if order.is_paid %} &#9989; {% else %} &#10060; {% endif %}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Is apply coupon: {% if order.coupon %} &#9989; {% else %} &#10060; {% endif %}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">City: {{ order.city }}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Address: {{ order.address }}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Phone: {{ order.phone }}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Notes: {{ order.order_notes }}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">First name: {{ order.buyer.first_name }}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Last name: {{ order.buyer.last_name }}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75); border-top: darkgray 1px solid;"><strong>Total amount: {{ order.total_amount }}</strong></span></div>
+        </div>
+    </div></div>
+</div>
+{% endblock %}

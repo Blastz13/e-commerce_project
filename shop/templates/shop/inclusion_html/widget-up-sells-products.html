@@ -1,0 +1,48 @@
+{% load thumbnail %}
+{% for product in up_sells_products %}
+    <!-- single-product start -->
+    <div class="col-lg-3 col-md-4 col-sm-4">
+								<div class="single-product">
+									<span class="sale-text">Sale</span>
+									<div class="product-img">
+										<a href="#">
+											<img class="primary-image" src="{% thumbnail product.preview_image 480x606 crop='smart' %}" alt="">
+											<img class="secondary-image" src="img/product/18.jpg" alt="">
+										</a>
+										<div class="actions">
+											<div class="action-buttons">
+												<div class="add-to-cart">
+													<a href="#">Add to cart</a>
+												</div>
+												<div class="add-to-links">
+													<div class="add-to-wishlist">
+														<a href="#" data-toggle="tooltip" title="" data-original-title="Add to Wishlist"><i class="fa fa-star"></i>
+														</a>
+													</div>
+													<div class="compare-button">
+														<a href="#" data-toggle="tooltip" title="" data-original-title="Compare"><i class="fa fa-exchange"></i></a>
+													</div>
+												</div>
+												<div class="quickviewbtn">
+													<a href="#" data-toggle="tooltip" title="" data-original-title="Quick View"><i class="fa fa-search-plus"></i></a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="product-content">
+										<h2 class="product-name"><a href="#">Convallis quam sit</a></h2>
+										<div class="pro-rating">
+											<a href="#"><i class="fa fa-star"></i></a>
+											<a href="#"><i class="fa fa-star"></i></a>
+											<a href="#"><i class="fa fa-star"></i></a>
+											<a href="#"><i class="fa fa-star"></i></a>
+											<a href="#"><i class="fa fa-star"></i></a>
+										</div>
+										<div class="price-box">
+											<span class="new-price">£90.00</span>
+										</div>
+									</div>
+								</div>
+							</div>
+    <!-- single-product end -->
+{% endfor %}

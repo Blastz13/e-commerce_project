@@ -1,1 +1,1 @@
-# e-commerce_project
+# django_shop

@@ -1,0 +1,13 @@
+<aside class="widget widget-categories">
+    <h3 class="sidebar-title">Categories</h3>
+    <ul class="sidebar-menu">
+        {# all_categories_feeds, slug_selected_category - the variables is taken from the inclusion tag is located in 'templatetags/filters_core.py' #}
+        {% for category in all_categories_feeds %}
+            {% if category.slug == slug_selected_category %}
+                <li style="color: red;"><a href="" style="color: red; pointer-events: none; cursor: default;">{{ category.title }}</a> ({{ category.feed_set.count }})</li>
+            {% else %}
+                <li><a href="{{ category.get_absolute_url }}">{{ category.title }}</a> ({{ category.feed_set.count }})</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</aside>

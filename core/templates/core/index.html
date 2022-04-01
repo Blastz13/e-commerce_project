@@ -1,0 +1,457 @@
+{% extends 'core/extends/base_main.html' %}
+{% load static %}
+{% load filters_core %}
+{% block title %}Главная | Фотомаг{% endblock %}
+{% block extra-scripts %}
+		<!-- jquery-ui CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'core/css/jquery-ui.css' %}">
+        <link rel="stylesheet" href="{% static 'shop/css/shop-filter.css' %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}
+{% block content %}
+	<!-- HOME SLIDER -->
+	<div class="slider-wrap">
+		<div class="fullwidthbanner-container" >
+			<div class="fullwidthbanner">
+				<ul>
+                    {% for feed in feeds %}
+					<li data-transition="random" data-slotamount="7" data-masterspeed="1000">
+						<img src="{% if feed.image %}{{ feed.image.url }}{% else %}../../static/core/img/slider/slide-img1.jpg{% endif %}" alt="slide" >
+						<div class="tp-caption large_black sfr"
+						data-x="150"
+						data-y="350"
+						data-speed="1100"
+						data-start="1100"
+						data-easing="easeInOutBack"
+							style="font-size: 18px; font-weight: bold; text-transform: uppercase; color: #FFF;">
+							{{ feed.sup_title}}
+						</div>
+						<div class="tp-caption large_black sfr"
+						data-x="150"
+						data-y="375"
+						data-speed="1100"
+						data-start="1100"
+						data-easing="easeInOutBack"
+							style="border-width: 2px; background-color: #ffffff; min-height: 1px;min-width: 400px;">
+						</div>
+						<div class="tp-caption large_black sfr"
+						data-x="150"
+						data-y="400"
+						data-speed="1100"
+						data-start="1400"
+						data-easing="easeInOutBack"
+							style=" font-size: 100px; font-weight: 800; line-height:80px;text-transform: uppercase; color: #fff; text-shadow: 0 0 2px rgba(0,0,0,.05)">
+							{% autoescape off %} {{ feed.title }} {% endautoescape %}
+						</div>
+						<div class="tp-caption large_black sfr"
+						data-x="150"
+						data-y="500"
+						data-speed="1100"
+						data-start="1400"
+						data-easing="easeInOutBack"
+							style=" font-size: 20px; font-weight: normal; color: #FFF;line-height:14px;text-transform: uppercase;">
+							{{ feed.description }}
+						</div>
+                        {% if feed.text_button %}
+						<div class="tp-caption lfb carousel-caption-inner"
+						data-x="150"
+						data-y="550"
+						data-speed="1300"
+						data-start="1700"
+						data-easing="easeInOutBack"
+							style=" font-size: 17px; font-weight: bold; text-transform: uppercase; color: #F3F3F3;">
+							<a href="{{ feed.url_button }}" class="s-btn" style="background: #EC4445;color: #ffffff;display: block;padding: 12px 28px;">{{ feed.text_button }}</a>
+						</div>
+                        {% endif %}
+					</li>
+                    {% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- END HOME SLIDER -->
+    {% for special_category_products in special_categories_products %}
+        {% extra_categories_products special_category_products.type_slider special_category_products %}
+    {% endfor %}
+{#	<!-- banner-area start -->#}
+{#	<div class="banner-area">#}
+{#		<div class="container">#}
+{#			<div class="row">#}
+{#				<!-- single-banner start -->#}
+{#				<div class="col-md-5 col-sm-5 col-xs-12">#}
+{#					<div class="single-banner">#}
+{#						<a href="#"><img src="{% static 'core/images/gallery/1L.jpg' %}" alt="" /></a>#}
+{#					</div>#}
+{#				</div>#}
+{#				<!-- single-banner end -->#}
+{#				<div class="col-md-7 col-sm-7 col-xs-12">#}
+{#					<div class="row">#}
+{#						<!-- single-banner start -->#}
+{#						<div class="col-md-12 col-sm-12 col-xs-12">#}
+{#							<div class="single-banner banner-margin">#}
+{#								<a href="#"><img src="{% static 'core/images/gallery/1L.jpg' %}" alt="" /></a>#}
+{#							</div>#}
+{#						</div>#}
+{#						<!-- single-banner end -->#}
+{#						<!-- single-banner start -->#}
+{#						<div class="col-md-6 col-sm-6 col-xs-12">#}
+{#							<div class="single-banner">#}
+{#								<a href="#"><img src="{% static 'core/images/gallery/1L.jpg' %}" alt="" /></a>#}
+{#							</div>#}
+{#						</div>#}
+{#						<!-- single-banner end -->#}
+{#						<!-- single-banner start -->#}
+{#						<div class="col-md-6 col-sm-6 col-xs-12">#}
+{#							<div class="single-banner">#}
+{#								<a href="#"><img src="{% static 'core/img/product/1L.jpg' %}" alt="" /></a>#}
+{#							</div>#}
+{#						</div>#}
+{#						<!-- single-banner end -->#}
+{#					</div>#}
+{#				</div>#}
+{#			</div>#}
+{#		</div>#}
+{#	</div>#}
+{#	<!-- banner-area end -->#}
+{#	<!-- banner-2-area start -->#}
+{#	<div class="banner-2-area pad-60">#}
+{#		<div class="container">#}
+{#			<div class="row">#}
+{#				<!-- single-banner start -->#}
+{#				<div class="col-md-4 col-sm-4">#}
+{#					<div class="single-banner">#}
+{#						<a href="#"><img src="{% static 'core/img/banner/6.jpg' %}" alt="" /></a>#}
+{#					</div>#}
+{#				</div>#}
+{#				<!-- single-banner end -->#}
+{#				<!-- single-banner start -->#}
+{#				<div class="col-md-4 col-sm-4">#}
+{#					<div class="single-banner">#}
+{#						<a href="#"><img src="../../static/core/img/banner/7.jpg" alt="" /></a>#}
+{#					</div>#}
+{#				</div>#}
+{#				<!-- single-banner end -->#}
+{#				<!-- single-banner start -->#}
+{#				<div class="col-md-4 col-sm-4">#}
+{#					<div class="single-banner">#}
+{#						<a href="#"><img src="../../static/core/img/banner/6.jpg" alt="" /></a>#}
+{#					</div>#}
+{#				</div>#}
+{#				<!-- single-banner end -->#}
+{#			</div>#}
+{#		</div>#}
+{#	</div>#}
+{#	<!-- banner-2-area end -->#}
+	<!-- latest-blog-area start -->
+	<div class="latest-blog-area pad-60">
+		<div class="container">
+			<!-- section-heading start -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="section-heading">
+						<h1>LATEST FROM BLOG</h1>
+						<div class="title-icon">
+							<span><i class="fa fa-angle-left"></i> <i class="fa fa-angle-right"></i></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- section-heading end -->
+			<div class="row">
+				<div class="latest-blog-curosel">
+                    {% for small_feed in small_feeds %}
+					<!-- single-latest-blog start -->
+					<div class="col-lg-12">
+						<div class="single-latest-blog">
+							<div class="latest-blog-img">
+								<a href="{{ small_feed.get_absolute_url }}"><img src="{% if small_feed.image %}{{ small_feed.image.url }}{% else %}../../static/core/img/slider/slide-img1.jpg{% endif %}" alt="" /></a>
+							</div>
+							<div class="latest-blog-content">
+								<h3><a href="#">{{ small_feed.title }}</a></h3>
+								<div class="meta">
+									<span class="post-category">in <a href="#">blog</a></span>
+									<span class="meta-border">|</span>
+									<span class="time"><i class="fa fa-clock-o"></i> {{ small_feed.date_publicate }}</span>
+								</div>
+								<p>{{ small_feed.description }}</p>
+							</div>
+						</div>
+					</div>
+					<!-- single-latest-blog end -->
+                    {% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- latest-blog-area end -->
+	<!-- brand-area start -->
+	<div class="brand-area pad-60">
+		<div class="container">
+			<!-- section-heading start -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="section-heading">
+						<h1>Our Brands</h1>
+						<div class="title-icon">
+							<span><i class="fa fa-angle-left"></i> <i class="fa fa-angle-right"></i></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- section-heading end -->
+			<div class="row">
+				<div class="brand-curosel">
+                    {% our_brands %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- brand-area end -->
+<style>
+#add-to-cart-product {
+  display: block;
+  margin-bottom: 15px;
+}
+#add-to-cart-product {
+  color: #fff;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 32px;
+  text-transform: uppercase;
+  border: 2px solid #fff;
+  background: none;
+}
+input[type="submit"] :hover {
+  border-color: #ec4445;
+  color: #fff;
+  background: #ec4445;
+}
+#add-to-cart-product-mini{
+  color: white;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 32px;
+  text-transform: uppercase;
+  border: 2px solid #fff;
+  background: black;
+}
+</style>
+<style>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.toast {
+  max-width: 350px;
+  overflow: hidden;
+  font-size: 0.875rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  display: none;
+}
+
+.toast:not(:last-child) {
+  margin-bottom: 0.75rem;
+}
+
+.toast_show {
+  display: block;
+}
+
+.toast__header {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 2rem 0.25rem 0.75rem;
+  color: #212529;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-clip: padding-box;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.toast__close {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.6;
+  appearance: button;
+  margin: 0;
+  font-family: inherit;
+  border-radius: 0;
+}
+
+.toast__body {
+  padding: 0.75rem;
+}
+</style>
+<script>
+            'use strict';
+
+            var Toast = function (element, config) {
+              var
+                _this = this,
+                _element = element,
+                _config = {
+                  autohide: true,
+                  delay: 5000
+                };
+              for (var prop in config) {
+                _config[prop] = config[prop];
+              }
+              Object.defineProperty(this, 'element', {
+                get: function () {
+                  return _element;
+                }
+              });
+              Object.defineProperty(this, 'config', {
+                get: function () {
+                  return _config;
+                }
+              });
+              _element.addEventListener('click', function (e) {
+                if (e.target.classList.contains('toast__close')) {
+                  _this.hide();
+                }
+              });
+            }
+
+            Toast.prototype = {
+              show: function () {
+                var _this = this;
+                this.element.classList.add('toast_show');
+                if (this.config.autohide) {
+                  setTimeout(function () {
+                    _this.hide();
+                  }, this.config.delay)
+                }
+              },
+              hide: function () {
+                this.element.classList.remove('toast_show');
+              }
+            };
+
+            Toast.create = function (header, body, color) {
+              var
+                fragment = document.createDocumentFragment(),
+                toast = document.createElement('div'),
+                toastHeader = document.createElement('div'),
+                toastClose = document.createElement('button'),
+                toastBody = document.createElement('div');
+              toast.classList.add('toast');
+              toast.style.backgroundColor = 'rgba(' + parseInt(color.substr(1, 2), 16) + ',' + parseInt(color.substr(3, 2), 16) + ',' + parseInt(color.substr(5, 2), 16) + ',0.5)';
+              toastHeader.classList.add('toast__header');
+              toastHeader.textContent = header;
+              toastClose.classList.add('toast__close');
+              toastClose.setAttribute('type', 'button');
+              toastClose.textContent = '×';
+              toastBody.classList.add('toast__body');
+              toastBody.textContent = body;
+              toastHeader.appendChild(toastClose);
+              toast.appendChild(toastHeader);
+              toast.appendChild(toastBody);
+              fragment.appendChild(toast);
+              return fragment;
+            };
+
+            Toast.add = function (params) {
+              var config = {
+                header: 'Название заголовка',
+                body: 'Текст сообщения...',
+                color: '#ffffff',
+                autohide: true,
+                delay: 5000
+              };
+              if (params !== undefined) {
+                for (var item in params) {
+                  config[item] = params[item];
+                }
+              }
+              if (!document.querySelector('.toasts')) {
+                var container = document.createElement('div');
+                container.classList.add('toasts');
+                container.style.cssText = 'position: fixed; top: 15px; right: 15px; width: 250px;';
+                document.body.appendChild(container);
+              }
+              document.querySelector('.toasts').appendChild(Toast.create(config.header, config.body, config.color));
+              var toasts = document.querySelectorAll('.toast');
+              var toast = new Toast(toasts[toasts.length - 1], { autohide: config.autohide, delay: config.delay });
+              toast.show();
+              return toast;
+            }
+            $(function() {
+                      $('form.add-to-cart-form').submit(function(e) {
+                        var $form = $(this);
+                        $.ajax({
+                          type: $form.attr('method'),
+                          url: $form.attr('action'),
+                          data: $form.serialize()
+                        }).done(function(e) {
+                                Toast.add({
+                                header: null,
+                                body: 'Товар успешно добавлен в корзину',
+                                color: '#49ff3a',
+                                autohide: true,
+                                delay: 2000
+                              });
+                        }).error(function(e) {
+                                Toast.add({
+                                header: null,
+                                body: 'Данный товар недоступен',
+                                color: '#ff2130',
+                                autohide: true,
+                                delay: 2000
+                              });
+                        });
+                        //отмена действия по умолчанию для кнопки submit
+                        e.preventDefault();
+                      });
+                    });
+            $(function() {
+                      $('form.add-to-wish-list-form').submit(function(e) {
+                        var $form = $(this);
+                        $.ajax({
+                          type: $form.attr('method'),
+                          url: $form.attr('action'),
+                          data: $form.serialize()
+                        }).done(function(e) {
+                                Toast.add({
+                                header: null,
+                                body: 'Товар успешно добавлен в wishlist',
+                                color: '#49ff3a',
+                                autohide: true,
+                                delay: 2000
+                              });
+                        }).error(function(e) {
+                                Toast.add({
+                                header: null,
+                                body: 'Данный товар недоступен',
+                                color: '#ff2130',
+                                autohide: true,
+                                delay: 2000
+                              });
+                        });
+                        //отмена действия по умолчанию для кнопки submit
+                        e.preventDefault();
+                      });
+                    });
+</script>
+{% endblock %}

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html class="no-js" lang=""><!-- Mobile specific metas
+		============================================ -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        {% load filters_shop %}
+		<!-- fonts
+		============================================ -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+		<!-- Favicon
+		============================================ -->
+		<link rel="shortcut icon" type="image/x-icon" href="{% static 'core/img/favicon.png' %}">
+
+		<!-- CSS  -->
+
+		<!-- Bootstrap CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
+
+		<!-- font-awesome CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'core/css/font-awesome.min.css' %}">
+
+		<!-- owl.carousel CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'core/css/owl.carousel.css' %}">
+
+		<!-- owl.theme CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'core/css/owl.theme.css' %}">
+
+		<!-- owl.transitions CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'core/css/owl.transitions.css' %}">
+
+		<!-- fancybox CSS
+		============================================ -->
+		<link rel="stylesheet" href="{% static 'core/css/fancybox/jquery.fancybox.css' %}">
+
+		<!-- animate CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'core/css/animate.css' %}">
+
+		<!-- meanmenu CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'core/css/meanmenu.min.css' %}" media="all" />
+
+		<!-- normalize CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'core/css/normalize.css' %}">
+
+		<!-- RS-slider CSS
+		============================================ -->
+		<link rel="stylesheet" type="text/css" href="{% static 'core/lib/rs-plugin/css/settings.css' %}" media="screen" />
+
+		<!-- main CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'core/css/main.css' %}">
+
+		<!-- style CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'core/style.css' %}">
+
+		<!-- responsive CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'core/css/responsive.css' %}">
+
+		<!-- modernizr js
+		============================================ -->
+        <script src="{% static 'core/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+        {% block extra-scripts %}{% endblock %}
+    <head>
+		<!-- Basic page needs
+		============================================ -->
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>{% block title%}Blog{%endblock%}</title>
+        <meta name="description" content="">
+
+
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+
+	<!-- header start -->
+	<header class="header-home">
+		<!-- header-top-area start -->
+		<div class="header-top-area hidden-xs">
+			<div class="container">
+				<div class="row">
+					<!-- header-top-left start -->
+					<div class="col-lg-6 col-md-6 col-sm-7">
+						<div class="header-top-left">
+							<div class="top-message">Default welcome message</div>
+							<div class="phone-number"> Call support free: <span>123 456  789</span></div>
+						</div>
+					</div>
+					<!-- header-top-left end -->
+					<!-- header-top-right start -->
+					<div class="col-lg-6 col-md-6 col-sm-5">
+						<div class="header-top-right">
+							<div class="lang-select">
+								<ul>
+									<li><a href="#"><img src="../../static/core/img/en.png" alt="" /></a></li>
+								</ul>
+							</div>
+							<div class="top-menu">
+								<ul>
+									<li><a href="{% url 'OrdersUser' %}">My Account</a></li>
+									<li><a href="{% url 'WishList' %}">My Wishlist</a></li>
+									<li><a href="{% url 'CartProduct' %}">Cart</a></li>
+									{% if request.user.is_authenticated %}
+									<li><a href="{% url 'Logout' %}">Logout</a></li>
+                                    {% else %}
+                                    <li><a href="{% url 'Account' %}">Login</a></li>
+                                    {% endif %}
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- header-top-right end -->
+				</div>
+			</div>
+		</div>
+		<!-- header-top-area end -->
+		<!-- header-mid-area start -->
+		<div class="header-mid-area">
+			<div class="container">
+				<div class="row">
+					<!-- logo start -->
+					<div class="col-lg-6 col-md-6 col-sm-4 col-xs-12">
+						<div class="logo">
+							<a href="{% url 'HomePage' %}" style="font-size: 50px; color: white; font-weight: bold;"><img src="" alt="" />Фотомаг</a>
+						</div>
+					</div>
+					<!-- logo end -->
+					<div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
+						{% widget_cart request %}
+						<!-- header-search start -->
+						<div class="header-search">
+							<form action="{% url 'ProductSearch' %}" method="get">
+								<input type="text" placeholder="Search product..." name="search"/>
+								<button type="submit"><i class="fa fa-search"></i></button>
+							</form>
+						</div>
+						<!-- header-search end -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- header-mid-area end -->
+		<!-- mainmenu-area start -->
+		<div class="mainmenu-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-sm-12">
+						<div class="mainmenu">
+							<nav>
+								<ul>
+									<li><a href="{% url 'HomePage' %}">Home</a></li>
+									<li><a href="about-us.html">about</a></li>
+									<li><a href="{% url 'FeedList' %}">Blog</a></li>
+									<li><a href="{% url 'ProductList' %}">Shop</a>
+										<div class="mega-menu">
+											<span>
+												<a href="#" class="mega-title">WOMEN CLOTH </a>
+												<a href="shop.html">casual shirt</a>
+												<a href="shop.html">rikke t-shirt</a>
+												<a href="shop.html">mia top </a>
+												<a href="shop.html">muscle tee </a>
+											</span>
+											<span>
+												<a href="#" class="mega-title">MEN CLOTH </a>
+												<a href="shop.html">casual shirt</a>
+												<a href="shop.html">rikke t-shirt</a>
+												<a href="shop.html">mia top </a>
+												<a href="shop.html">muscle tee </a>
+											</span>
+											<span>
+												<a href="#" class="mega-title">WOMEN JEWELRY </a>
+												<a href="shop.html">necklace </a>
+												<a href="shop.html">chunky short striped </a>
+												<a href="shop.html">samhar cuff</a>
+												<a href="shop.html">nail set </a>
+											</span>
+											<span class="mega-menu-img">
+												<a href="shop.html"><img alt="" src="../../static/core/img/4.jpg"></a>
+											</span>
+										</div>
+									</li>
+									<li><a href="#">Pages</a>
+										<ul class="sub-menu">
+											<li><a href="about-us.html">about us</a></li>
+											<li><a href="{% url 'LeaveMessage' %}">contact us</a></li>
+											<li><a href="shop.html">shop grid</a></li>
+											<li><a href="shop-list.html">shop list</a></li>
+											<li><a href="product-virtual.html">product Details</a></li>
+											<li><a href="blog.html">blog</a></li>
+											<li><a href="blog-post-img.html">blog details</a></li>
+											<li><a href="cart.html">shopping cart</a></li>
+											<li><a href="checkout.html">checkout</a></li>
+											<li><a href="wishlist.html">wishlist</a></li>
+											<li><a href="my-account.html">my-account</a></li>
+											<li><a href="404.html">404 page</a></li>
+										</ul>
+									</li>
+									<li><a href="shop.html">Footwear  </a></li>
+									<li><a href="{% url 'LeaveMessage' %}">Contact</a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- mainmenu-area end -->
+		<!-- mobile-menu-area start -->
+		<div class="mobile-menu-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="mobile-menu">
+							<nav id="dropdown">
+								<ul>
+									<li><a href="{% url 'HomePage' %}">Home</a></li>
+									<li><a href="{% url 'FeedList' %}">blog</a></li>
+									<li><a href="{% url 'ProductList' %}">Shop</a></li>
+									<li><a href="#">Pages</a>
+										<ul>
+											<li><a href="about-us.html">about us</a></li>
+											<li><a href="{% url 'LeaveMessage' %}">contact us</a></li>
+											<li><a href="shop.html">shop grid</a></li>
+											<li><a href="shop-list.html">shop list</a></li>
+											<li><a href="product-virtual.html">product Details</a></li>
+											<li><a href="{% url 'FeedList' %}l">blog</a></li>
+											<li><a href="blog-post-img.html">blog details</a></li>
+											<li><a href="{% url 'CartProduct' %}">shopping cart</a></li>
+											<li><a href="checkout.html">checkout</a></li>
+											<li><a href="wishlist.html">wishlist</a></li>
+											<li><a href="my-account.html">my-account</a></li>
+											<li><a href="404.html">404 page</a></li>
+										</ul>
+									</li>
+									<li><a href="{% url 'LeaveMessage' %}">Contact</a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- mobile-menu-area end -->
+	</header>
+	<!-- header end -->
+    {% block content %}{% endblock %}
+	<!-- footer start -->
+	<footer>
+		<!-- footer-top-area start -->
+		<div class="footer-top-area">
+			<div class="container">
+				<div class="row">
+					<!-- footer-widget start -->
+					<div class="col-lg-3 col-md-3 col-sm-4">
+						<div class="footer-widget">
+							<img src="../../static/core/img/logo/logo.png" alt="" />
+							<p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. .</p>
+							<div class="widget-icon">
+								<a href="#"><i class="fa fa-facebook"></i></a>
+								<a href="#"><i class="fa fa-twitter"></i></a>
+								<a href="#"><i class="fa fa-linkedin"></i></a>
+								<a href="#"><i class="fa fa-google-plus"></i></a>
+							</div>
+						</div>
+					</div>
+					<!-- footer-widget end -->
+					<!-- footer-widget start -->
+					<div class="col-lg-3 col-md-3 hidden-sm">
+						<div class="footer-widget">
+							<h3>Our services</h3>
+							<ul class="footer-menu">
+								<li><a href="#">Shipping & Returns</a></li>
+								<li><a href="#">Secure Shopping</a></li>
+								<li><a href="#">International Shipping</a></li>
+								<li><a href="#">Affiliates</a></li>
+								<li><a href="#">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+					<!-- footer-widget end -->
+					<!-- footer-widget start -->
+					<div class="col-lg-3 col-md-3 col-sm-4">
+						<div class="footer-widget">
+							<h3>Our services</h3>
+							<ul class="footer-menu">
+								<li><a href="#">Shipping & Returns</a></li>
+								<li><a href="#">Secure Shopping</a></li>
+								<li><a href="#">International Shipping</a></li>
+								<li><a href="#">Affiliates</a></li>
+								<li><a href="#">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+					<!-- footer-widget end -->
+					<!-- footer-widget start -->
+					<div class="col-lg-3 col-md-3 col-sm-4">
+						<div class="footer-widget">
+							<h3>CONTACT US</h3>
+							<ul class="footer-contact">
+								<li>
+									<i class="fa fa-map-marker"> </i>
+									Addresss: 123 Pall Mall, London England
+								</li>
+								<li>
+									<i class="fa fa-envelope"> </i>
+									Email: admin@themepure.net
+								</li>
+								<li>
+									<i class="fa fa-phone"> </i>
+									Phone: +8801912 199981
+								</li>
+							</ul>
+						</div>
+					</div>
+					<!-- footer-widget end -->
+				</div>
+			</div>
+		</div>
+		<!-- footer-top-area end -->
+		<!-- footer-bottom-area start -->
+		<div class="footer-bottom-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-6">
+						<div class="copyright">
+							<p>Copyright © <a href="#">ThemePure</a>. All Rights Reserved</p>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6">
+						<div class="payment-img">
+							<img src="../../static/core/img/payment.png" alt="" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- footer-bottom-area end -->
+	</footer>
+	<!-- footer end -->
+
+		<!-- JS -->
+
+		<!-- jquery js -->
+        <script src="{% static 'core/js/vendor/jquery-1.12.0.min.js' %}"></script>
+
+		<!-- price-slider js -->
+        <script src="{% static 'core/js/price-slider.js' %}"></script>
+
+		<!-- bootstrap js -->
+        <script src="{% static 'core/js/bootstrap.min.js' %}"></script>
+
+		<!-- owl.carousel.min js -->
+        <script src="{% static 'core/js/owl.carousel.min.js' %}"></script>
+
+		<!-- jquery.scrollUp js -->
+        <script src="{% static 'core/js/jquery.scrollUp.min.js' %}"></script>
+
+		<!-- mixitup js -->
+        <script src="{% static 'core/js/jquery.mixitup.min.js' %}"></script>
+
+		<!-- fancybox js -->
+		<script src="{% static 'core/js/fancybox/jquery.fancybox.pack.js' %}"></script>
+
+		<!-- jquery-counterup js -->
+        <script src="{% static 'core/js/jquery.counterup.min.js' %}"></script>
+        <script src="{% static 'core/js/waypoints.min.js' %}"></script>
+
+		<!-- jquery-meanmenu js -->
+		<script src="{% static 'core/js/jquery.meanmenu.js' %}"></script>
+
+		<!-- RS-Plugin JS
+		============================================ -->
+		<script type="text/javascript" src="{% static 'core/lib/rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'core/lib/rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script>
+		<script src="{% static 'core/lib/rs-plugin/rs.home.js' %}"></script>
+
+		<!-- plugins js -->
+        <script src="{% static 'core/js/plugins.js' %}"></script>
+
+		<!-- main js -->
+        <script src="{% static 'core/js/main.js' %}"></script>
+
+        {% block extra-scripts-footer %}{% endblock %}
+    </body>
+</html>

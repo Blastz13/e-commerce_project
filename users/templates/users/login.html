@@ -1,0 +1,68 @@
+{% extends 'core/extends/base.html' %}
+{% block content %}
+	<!-- entry-header-area start -->
+	<div class="entry-header-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="entry-header">
+						<h1 class="entry-title">My Account</h1>
+                        {% for message in messages %}
+                            {{ message.tags }}
+                            {{ message|safe }}
+                        {% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- entry-header-area end -->
+	<!-- my-account-area start -->
+	<div class="my-account-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<form action="{% url 'Account' %}" method="post">{% csrf_token %}
+						<div class="form-fields">
+							<h2>Login</h2>
+                            {% for field in form_login %}
+							<p>
+								{{ field.label }}
+								{{ field }}
+							</p>
+                            {% endfor%}
+                            {% for non_field_error in form_login.non_field_errors %}
+                                <p style="color: red;">{{ non_field_error }}</p>
+                            {% endfor %}
+						</div>
+						<div class="form-action">
+							<p class="lost_password"><a href="#">Lost your password?</a></p>
+							<input type="submit" value="Login" />
+						</div>
+					</form>
+				</div>
+				<div class="col-md-6">
+					<form action="{% url 'SignUp' %}" method="post">{% csrf_token %}
+						<div class="form-fields">
+							<h2>Register</h2>
+							{% for field in form_registration%}
+                                {% for error in field.errors %}
+                                    <p style="color: red;">{{ error }}</p>
+                                {% endfor %}
+                            <p>
+								{{ field.label }}
+								{{ field }}
+							</p>
+                            {% endfor %}
+                            <label><input type="checkbox" required/>Согласен на обработку персональных данных</label>
+						</div>
+						<div class="form-action">
+							<input type="submit" value="Register" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- my-account-area end -->
+{% endblock %}

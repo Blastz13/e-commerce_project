@@ -1,0 +1,194 @@
+{% extends 'core/extends/base.html' %}
+{% load filters_core %}
+{% load static %}
+{% block content %}
+    <!-- breadcrumb-area start -->
+	<div class="breadcrumb-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="breadcrumb">
+						<ul>
+							<li><a href="{% url 'HomePage' %}">Home</a> <i class="fa fa-angle-right"></i></li>
+							<li><a href="{% url 'FeedList' %}">Blog</a> <i class="fa fa-angle-right"></i></li>
+                            <li><a href="{{ feed.category.get_absolute_url }}">{{ feed.category }}</a> <i class="fa fa-angle-right"></i></li>
+							<li>{{ feed.title }}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- breadcrumb-area end -->
+
+	<!-- blog-area start -->
+	<div class="blog-area single-blog pad-60">
+		<div class="container">
+			<div class="row">
+				<!-- blog-left-sidebar start -->
+				<div class="col-lg-3 col-md-3">
+					<!-- widget-search start -->
+					<aside class="widget widget-search">
+						<h3 class="sidebar-title">Search</h3>
+						<form action="#">
+							<div class="widget-form">
+								<input type="text" placeholder="search" />
+								<button type="submit"><i class="fa fa-search"></i></button>
+							</div>
+						</form>
+					</aside>
+					<!-- widget-search end -->
+					<!-- widget-categories start -->
+                    {# loading an inclusion tag that outputs all categories feeds (input count feeds, slug of the feed you want to select, default output all feeds) #}
+                    {# inclusion tag is located in 'templatetags/filters_core.py' #}
+                    {# the template tag's is located in 'template/core/inclusion_html/widget-categories-feeds.html' #}
+					{% all_categories_feeds %}
+					<!-- widget-categories end -->
+					<!-- widget-archive start -->
+					<!-- widget-archive end -->
+					<!-- widget-recent start -->
+					{# loading an inclusion tag that outputs all recent feeds (input count feeds, default output all feeds)#}
+                    {# inclusion tag is located in 'templatetags/filters_core.py' #}
+                    {# the template tag's is located in 'template/core/inclusion_html/widget-recent-feeds.html' #}
+                    {% recent_feeds %}
+					<!-- widget-recent end -->
+					<!-- widget-tags start -->
+                    {# loading an inclusion tag that outputs all tags (input count tags, slug of the tag you want to select, default output all tags)#}
+                    {# inclusion tag is located in 'templatetags/filters_core.py' #}
+                    {# the template tag's is located in 'template/core/inclusion_html/widget-tags-feeds.html' #}
+                    {% all_tags %}
+					<!-- widget-tags end -->
+				</div>
+				<!-- blog-left-sidebar end -->
+				<div class="col-lg-9 col-md-9">
+					<!-- single-blog start -->
+					<article class="blog-post-wrapper">
+						<div class="post-thumbnail">
+							<img src="{{ feed.image.url }}" alt="" />
+						</div>
+						<div class="post-information">
+							<h2>{{ feed.title }}</h2>
+							<div class="entry-meta">
+								<span class="author-meta"><i class="fa fa-user"></i> <a href="#">admin</a></span>
+								<span><i class="fa fa-clock-o"></i> {{ feed.date_published_from|date:'N d, Y' }}</span>
+								<span>
+									<i class="fa fa-tags"></i>
+									{% for tag in feed.tag.all %}
+                                    <a href="#">{{ tag.title }}</a>{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+								</span>
+								<span><i class="fa fa-comments-o"></i> <a href="#">{{ feed.comments.count }} comments</a></span>
+							</div>
+							<div class="entry-content">
+                                {% autoescape off %} {{ feed.body }} {% endautoescape %}
+							</div>
+							<div class="social-sharing">
+								<h3>Share this post</h3>
+								<div class="sharing-icon">
+									<a href="#" data-toggle="tooltip" title="Facebook"><i class="fa fa-facebook"></i></a>
+									<a href="#" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a>
+									<a href="#" data-toggle="tooltip" title="Pinterest"><i class="fa fa-pinterest"></i></a>
+									<a href="#" data-toggle="tooltip" title="Google-plus"><i class="fa fa-google-plus"></i></a>
+									<a href="#" data-toggle="tooltip" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+								</div>
+							</div>
+							<div class="author-info">
+								<div class="author-avatar"><img src="../../static/core/img/blog/avatar.png" alt="" /></div>
+								<div class="author-description">
+									<h2>About the Author: <a href="#">admin</a></h2>
+								</div>
+							</div>
+						</div>
+					</article>
+					<div class="clear"></div>
+					<div class="single-post-comments">
+						<div class="comments-area">
+							<div class="comments-heading">
+								<h3>{{ feed.comments.count }} comments</h3>
+							</div>
+							<div class="comments-list">
+								<ul>
+                                    {% for comment in feed.get_comments %}
+									    <li>
+                                            <div class="comments-details">
+                                                <div class="comments-list-img">
+                                                    <img src="{% static 'core/img/blog/comments/1.png' %}" alt="" />
+                                                </div>
+                                                <div class="comments-content-wrap">
+                                                    <span>
+                                                        <b><a href="#">{{ comment.name }}</a></b>
+                                                        <span class="post-time">{{ comment.date_publicate|date:'N d, Y | G:i' }}</span>
+                                                        <a href="#form-add-comment" onclick="addReview('{{ comment.name }}', '{{ comment.id }}')">Reply</a>
+                                                    </span>
+                                                    <p>{{ comment.text }}</p>
+                                                </div>
+                                            </div>
+									    </li>
+                                            {% for sup_comment in comment.comment_set.all|dictsort:"date_publicate" %}
+                                                <li class="threaded-comments">
+                                                    <div class="comments-details">
+                                                        <div class="comments-list-img">
+                                                            <img src="{% static 'core/img/blog/comments/2.jpg' %}" alt="{{ sup_comment.name }}" />
+                                                        </div>
+                                                        <div class="comments-content-wrap">
+                                                            <span>
+                                                                <b><a href="#">{{ sup_comment.name }}</a></b>
+                                                                <span class="post-time">{{ sup_comment.date_publicate|date:'N d, Y | G:i' }}</span>
+                                                                <a href="#form-add-comment" onclick="addReview('{{ sup_comment.name }}', '{{ comment.id }}')">Reply</a>
+                                                            </span>
+                                                            <p>{{ sup_comment.text }}</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            {% endfor %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                            <div class="comment-respond">
+							<h3 class="comment-reply-title">Leave a Reply </h3>
+							<span class="email-notes">Your email address will not be published. Required fields are marked *</span>
+							<form action="{% url 'FeedDetail' feed.category.slug feed.slug %}" id="form-add-comment" method="post">{% csrf_token %}
+								<div class="row">
+                                    <input type="hidden" name="parent" id="contactparent" value="">
+									<div class="col-md-4">
+										<p>Name *</p>
+										{{ comment_form.name }}
+									</div>
+									<div class="col-md-4">
+										<p>Email *</p>
+										{{ comment_form.email }}
+									</div>
+									<div class="col-md-12 comment-form-comment">
+										<p>Website</p>
+{#										<textarea id="message" cols="30" rows="10"></textarea>#}
+                                        {{ comment_form.text }}
+										<input type="submit" value="Post Comment" />
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<nav class="nav-single">
+						<span class="nav-previous">
+							{% if previous_feed %}<a href="{{previous_feed.get_absolute_url}}"><span>←</span> {{previous_feed.title}}</a>{% endif %}
+						</span>
+						<span class="nav-next">
+							{% if next_feed %}<a href="{{ next_feed.get_absolute_url }}">{{ next_feed.title}} <span>→</span></a>{% endif %}
+						</span>
+					</nav>
+					<!-- single-blog end -->
+				</div>
+			</div>
+		</div>
+	</div>
+    <!-- blog-area end -->
+{% endblock %}
+{% block extra-scripts-footer %}
+    <script>
+        function addReview(name, id) {
+            document.getElementById("contactparent").value = id;
+            document.getElementById("message").innerText = `${name}, `
+        }
+    </script>
+{% endblock %}
