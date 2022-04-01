@@ -19,7 +19,7 @@ pip3 install -r requirements.txt
 Перейдите в каталог веб-приложения, создайте миграции и соберите статику.
 
 ```bash
-cd tree_emploes
+cd e-commerce_project
 python3 manage.py makemigrations
 python3 manage.py migrate
 python3 manage.py collectstatic
@@ -36,23 +36,6 @@ python3 manage.py createsuperuser
 ```bash
 python3 manage.py runserver
 ```
-
-### Работа веб-приложения
-
-```url
-admin/ - Переход в админку
-api/v1/list-subdivision/ - Вывод всех подразделений**
-api/v1/list-subdivision-emploe/<int:pk> - Вывод сотрудников конкретного подразделения***
-api/v1/detail-emploe/<int:pk> - Вывод информации о сотруднике
-api/v1/detail-emploe/<int:pk>/subordinate - Вывод подчиненных сотрудников
-```
-
-** - Поддерживает флаг ?reverse=True или False для сортировки по полю Название в прямом и обратном порядке
-
-*** - Поддерживает флаг ?reverse=True или False для сортировки по полю ФИО в прямом и обратном порядке
-
-Теперь вы успешно можете пользоваться 
-
 
 ### Лицензия
 
