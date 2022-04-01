@@ -1,0 +1,112 @@
+{% extends 'core/extends/base.html' %}
+{% load filters_core %}
+{% block content %}
+	<!-- breadcrumb-area start -->
+	<div class="breadcrumb-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="breadcrumb">
+						<ul>
+							<li><a href="{%  url 'HomePage' %}">Home</a> <i class="fa fa-angle-right"></i></li>
+							<li><a href="{%  url 'FeedList' %}">Blog</a> <i class="fa fa-angle-right"></i></li>
+                            {% if obj_selected_category %}<li>{{ obj_selected_category.title }}<i class="fa fa-angle-right"></i></li>{% endif %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- breadcrumb-area end -->
+
+	<!-- blog-area start -->
+	<div class="blog-area pad-60">
+		<div class="container">
+			<div class="row">
+				<!-- blog-left-sidebar start -->
+				<div class="col-lg-3 col-md-3">
+					<!-- widget-search start -->
+					<aside class="widget widget-search">
+						<h3 class="sidebar-title">Search</h3>
+						<form action="#">
+							<div class="widget-form">
+								<input type="text" placeholder="search" />
+								<button type="submit"><i class="fa fa-search"></i></button>
+							</div>
+						</form>
+					</aside>
+					<!-- widget-search end -->
+					<!-- widget-categories start -->
+                    {# loading an inclusion tag that outputs all categories feeds (input count feeds, slug of the feed you want to select, default output all feeds) #}
+                    {# inclusion tag is located in 'templatetags/filters_core.py' #}
+                    {# the template tag's is located in 'template/core/inclusion_html/widget-categories-feeds.html' #}
+					{% all_categories_feeds %}
+					<!-- widget-categories end -->
+					<!-- widget-archive start -->
+					<!-- widget-archive end -->
+					<!-- widget-recent start -->
+                    {# loading an inclusion tag that outputs all recent feeds (input count feeds, default output all feeds)#}
+                    {# inclusion tag is located in 'templatetags/filters_core.py' #}
+                    {# the template tag's is located in 'template/core/inclusion_html/widget-recent-feeds.html' #}
+                    {% recent_feeds %}
+					<!-- widget-recent end -->
+					<!-- widget-tags start -->
+                    {# loading an inclusion tag that outputs all tags (input count tags, slug of the tag you want to select, default output all tags)#}
+                    {# inclusion tag is located in 'templatetags/filters_core.py' #}
+                    {# the template tag's is located in 'template/core/inclusion_html/widget-tags-feeds.html' #}
+                    {% all_tags obj_selected_category.slug %}
+					<!-- widget-tags end -->
+				</div>
+				<!-- blog-left-sidebar end -->
+				<div class="col-lg-9 col-md-9">
+                    {% for feed in feeds_all %}
+                        <!-- single-blog start -->
+                        <article class="blog-post-wrapper">
+                            <div class="post-thumbnail">
+                                <div class="post-slider">
+                                    <a href="{{ feed.get_absolute_url }}"><img src="{{ feed.image.url }}" alt="{{ feed.title }}" /></a>
+{#                                    <a href="#"><img src="../../static/core/img/blog/post-slider/2.jpg" alt="" /></a>#}
+{#                                    <a href="#"><img src="../../static/core/img/blog/post-slider/3.jpg" alt="" /></a>#}
+{#                                    <a href="#"><img src="../../static/core/img/blog/post-slider/4.jpg" alt="" /></a>#}
+{#                                    <a href="#"><img src="../../static/core/img/blog/post-slider/5.jpg" alt="" /></a>#}
+                                </div>
+                            </div>
+                            <div class="post-information">
+                                <h2><a href="#">{{ feed.title }}</a></h2>
+                                <div class="small-meta">
+                                    <span><i class="fa fa-calendar"></i> {{ feed.date_published_from|date:'N d, Y' }}</span>
+                                    <a href="#"><i class="fa fa-comments-o"></i> {{ feed.comments.count }} comments</a>
+                                </div>
+                                <p>{% autoescape off %} {{ feed.body|truncatewords:20 }} {% endautoescape %}</p>
+                                <a class="readmore" href="{{ feed.get_absolute_url }}">read more</a>
+                            </div>
+                        </article>
+                        <!-- single-blog end -->
+                    {% endfor %}
+                    {% if is_has_other_page %}
+                        <!-- pagination start -->
+                        <div class="pagination">
+                            <ul>
+                                {% if prev_page %}
+                                <li><a href="{{ prev_page }}"><i class="fa fa-chevron-left"></i></a></li>
+                                {% endif %}
+                                {% for number_page in feeds_all.paginator.page_range %}
+                                    {% if feeds_all.number == number_page %}
+                                        <li class="active">{{ number_page }}</li>
+                                    {% elif number_page > feeds_all.number|add:-2 and number_page < feeds_all.number|add:2 %}
+                                        <li><a href="?page={{ number_page }}"> {{ number_page }} </a></li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if next_page %}
+                                <li><a href="{{ next_page }}"><i class="fa fa-chevron-right"></i></a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <!-- pagination end -->
+                    {% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- blog-area end -->
+{% endblock %}

@@ -1,0 +1,21 @@
+	<div class="breadcrumb-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="breadcrumb">
+						<ul>
+							<li><a href="{% url 'HomePage' %}">Home</a> <i class="fa fa-angle-right"></i></li>
+							<li><a href="{% url 'ProductList' %}">Shop</a> <i class="fa fa-angle-right"></i></li>
+                            {% for category in tree_categories %}
+                                {% if forloop.last %}
+                                    <li>{{ category.title }}</li>
+                                {% else %}
+                                    <li><a href="{{ category.get_absolute_url }}">{{ category.title }}</a> <i class="fa fa-angle-right"></i></li>
+                                {% endif %}
+                            {% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

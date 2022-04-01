@@ -1,0 +1,33 @@
+{% load thumbnail %}
+<!-- widget-recent start -->
+<aside class="widget top-product-widget">
+    <h3 class="sidebar-title">Top rated products</h3>
+    <ul>
+        {% for top_rated_product in top_rated_products %}
+        <li>
+            <div class="single-product">
+                <div class="product-img">
+                    <a href="{{ top_rated_product.get_absolute_url }}">
+                        <img class="primary-image" src="{% thumbnail top_rated_product.preview_image 480x606 crop='smart' %}" alt="" />
+{#                        <img class="secondary-image" src="../../static/core/img/product/16.jpg" alt="" />#}
+                    </a>
+                </div>
+                <div class="product-content">
+                    <div class="pro-info">
+                        <h2 class="product-name"><a href="{{ top_rated_product.get_absolute_url }}">{{ top_rated_product.title }}</a></h2>
+                        <div class="price-box">
+                            {% if top_rated_product.discount_price %}
+                                <span class="new-price">£{{ top_rated_product.discount_price }}</span>
+                                <span class="old-price">£{{ top_rated_product.price }}</span>
+                            {% else %}
+                                <span class="new-price">£{{ top_rated_product.price }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</aside>
+<!-- widget-recent end -->

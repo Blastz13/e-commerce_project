@@ -1,0 +1,290 @@
+{% extends 'shop/extends/base.html' %}
+{% load thumbnail %}
+{% block extra-scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}
+{% block content %}
+	<!-- entry-header-area start -->
+	<div class="entry-header-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="entry-header">
+						<h1 class="entry-title">Wishlist</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- entry-header-area end -->
+	<!-- wishlist-area start -->
+	<div class="wishlist-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="wishlist-content">
+							<div class="wishlist-table table-responsive">
+								<table>
+									<thead>
+										<tr>
+											<th class="product-remove"><span class="nobr">Remove</span></th>
+											<th class="product-thumbnail">Image</th>
+											<th class="product-name"><span class="nobr">Product Name</span></th>
+											<th class="product-price"><span class="nobr"> Unit Price </span></th>
+											<th class="product-stock-stauts"><span class="nobr"> Stock Status </span></th>
+											<th class="product-add-to-cart"><span class="nobr">Add To Cart </span></th>
+										</tr>
+									</thead>
+									<tbody>
+                                    {% for item in wish_list %}
+                                        {% with product=item.product%}
+										<tr>
+											<td class="product-remove"><form action="{% url 'del_product_to_wish_list' item.product_id %}" method="post">{% csrf_token %}<input type="submit" style="background: none; border: none;" value="&#10006;"></form></td>
+											<td class="product-thumbnail"><a href="{{ product.get_absolute_url }}"><img src="{% thumbnail product.preview_image 480x606 crop='smart' %}" alt="" /></a></td>
+											<td class="product-name"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></td>
+											<td class="product-price"><span class="amount">£{% if product.discount_price %}{{ product.discount_price }}{% else %}{{ product.price }}{% endif %}</span></td>
+											<td class="product-stock-status"><span class="wishlist-in-stock">{% if product.is_available %}In Stock{% else %}Not Available{% endif %}</span></td>
+											<td class="product-add-to-cart">
+                                                <form action="{% url 'add_to_cart_alone_product' product.slug %}" method="post" class="add-to-cart-form">{% csrf_token %}
+                                                    <input type="hidden" name="total_price" value="{% if product.discount_price %}{{ product.price }}{% else %}{{ product.price }}{% endif %}">
+                                                    <input type="hidden" name="quantity" value="1">
+                                                    <input type="submit" value="Add to cart" id="add-to-cart-product">
+                                                </form>
+                                            </td>
+										</tr>
+                                        {% endwith %}
+                                    {% endfor %}
+									</tbody>
+									<tfoot>
+										<tr>
+											<td colspan="6">
+												<div class="wishlist-share">
+													<h4 class="wishlist-share-title">Share on:</h4>
+													<ul>
+														<li><a class="facebook" href="#"></a></li>
+														<li><a class="twitter" href="#"></a></li>
+														<li><a class="pinterest" href="#"></a></li>
+														<li><a class="googleplus" href="#"></a></li>
+														<li><a class="email" href="#"></a></li>
+													</ul>
+												</div>
+											</td>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- wishlist-area end -->
+<style>
+#add-to-cart-product {
+  display: block;
+  margin-bottom: 15px;
+}
+#add-to-cart-product {
+  color: #fff;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 32px;
+  text-transform: uppercase;
+  border: 2px solid #fff;
+  background: black;
+}
+input[type="submit"] :hover {
+  border-color: #ec4445;
+  color: #fff;
+  background: #ec4445;
+}
+</style>
+<style>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.toast {
+  max-width: 350px;
+  overflow: hidden;
+  font-size: 0.875rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  display: none;
+}
+
+.toast:not(:last-child) {
+  margin-bottom: 0.75rem;
+}
+
+.toast_show {
+  display: block;
+}
+
+.toast__header {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 2rem 0.25rem 0.75rem;
+  color: #212529;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-clip: padding-box;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.toast__close {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.6;
+  appearance: button;
+  margin: 0;
+  font-family: inherit;
+  border-radius: 0;
+}
+
+.toast__body {
+  padding: 0.75rem;
+}
+</style>
+<script>
+            'use strict';
+
+            var Toast = function (element, config) {
+              var
+                _this = this,
+                _element = element,
+                _config = {
+                  autohide: true,
+                  delay: 5000
+                };
+              for (var prop in config) {
+                _config[prop] = config[prop];
+              }
+              Object.defineProperty(this, 'element', {
+                get: function () {
+                  return _element;
+                }
+              });
+              Object.defineProperty(this, 'config', {
+                get: function () {
+                  return _config;
+                }
+              });
+              _element.addEventListener('click', function (e) {
+                if (e.target.classList.contains('toast__close')) {
+                  _this.hide();
+                }
+              });
+            }
+
+            Toast.prototype = {
+              show: function () {
+                var _this = this;
+                this.element.classList.add('toast_show');
+                if (this.config.autohide) {
+                  setTimeout(function () {
+                    _this.hide();
+                  }, this.config.delay)
+                }
+              },
+              hide: function () {
+                this.element.classList.remove('toast_show');
+              }
+            };
+
+            Toast.create = function (header, body, color) {
+              var
+                fragment = document.createDocumentFragment(),
+                toast = document.createElement('div'),
+                toastHeader = document.createElement('div'),
+                toastClose = document.createElement('button'),
+                toastBody = document.createElement('div');
+              toast.classList.add('toast');
+              toast.style.backgroundColor = 'rgba(' + parseInt(color.substr(1, 2), 16) + ',' + parseInt(color.substr(3, 2), 16) + ',' + parseInt(color.substr(5, 2), 16) + ',0.5)';
+              toastHeader.classList.add('toast__header');
+              toastHeader.textContent = header;
+              toastClose.classList.add('toast__close');
+              toastClose.setAttribute('type', 'button');
+              toastClose.textContent = '×';
+              toastBody.classList.add('toast__body');
+              toastBody.textContent = body;
+              toastHeader.appendChild(toastClose);
+              toast.appendChild(toastHeader);
+              toast.appendChild(toastBody);
+              fragment.appendChild(toast);
+              return fragment;
+            };
+
+            Toast.add = function (params) {
+              var config = {
+                header: 'Название заголовка',
+                body: 'Текст сообщения...',
+                color: '#ffffff',
+                autohide: true,
+                delay: 5000
+              };
+              if (params !== undefined) {
+                for (var item in params) {
+                  config[item] = params[item];
+                }
+              }
+              if (!document.querySelector('.toasts')) {
+                var container = document.createElement('div');
+                container.classList.add('toasts');
+                container.style.cssText = 'position: fixed; top: 15px; right: 15px; width: 250px;';
+                document.body.appendChild(container);
+              }
+              document.querySelector('.toasts').appendChild(Toast.create(config.header, config.body, config.color));
+              var toasts = document.querySelectorAll('.toast');
+              var toast = new Toast(toasts[toasts.length - 1], { autohide: config.autohide, delay: config.delay });
+              toast.show();
+              return toast;
+            }
+            $(function() {
+                      $('form.add-to-cart-form').submit(function(e) {
+                        var $form = $(this);
+                        $.ajax({
+                          type: $form.attr('method'),
+                          url: $form.attr('action'),
+                          data: $form.serialize()
+                        }).done(function(e) {
+                                Toast.add({
+                                header: null,
+                                body: 'Товар успешно добавлен в корзину',
+                                color: '#49ff3a',
+                                autohide: true,
+                                delay: 2000
+                              });
+                        }).error(function(e) {
+                                Toast.add({
+                                header: null,
+                                body: 'Данный товар недоступен',
+                                color: '#ff2130',
+                                autohide: true,
+                                delay: 2000
+                              });
+                        });
+                        //отмена действия по умолчанию для кнопки submit
+                        e.preventDefault();
+                      });
+                    });
+</script>
+{% endblock %}

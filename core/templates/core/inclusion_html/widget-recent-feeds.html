@@ -1,0 +1,19 @@
+<aside class="widget widget-recent">
+    <h3 class="sidebar-title">Recent</h3>
+    <ul>
+        {# recent_feeds - the variable is taken from the inclusion tag is located in 'templatetags/filters_core.py' #}
+        {% for last_feed in recent_feeds %}
+            <li>
+                <div class="post-wrapper">
+                    <div class="post-sidebar-img">
+                        <a href="{{ last_feed.get_absolute_url }}"><img src="{{ last_feed.image.url }}" alt="{{ last_feed.title }}" /></a>
+                    </div>
+                    <div class="post-sidebar-info">
+                        <h3><a href="{{ last_feed.get_absolute_url }}">{{ last_feed }}</a></h3>
+                        <div class="r-post-date"> {{ last_feed.date_published_from|date:'N d, Y' }}</div>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</aside>

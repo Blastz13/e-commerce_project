@@ -1,0 +1,216 @@
+{% load thumbnail %}
+{% ifequal type_slider 'row1' %}
+   <!-- features-area start -->
+	<div class="features-area pad-60">
+		<div class="container">
+			<!-- section-heading start -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="section-heading">
+						<h1>{{ special_category_products.title }}</h1>
+						<div class="title-icon">
+							<span><i class="fa fa-angle-left"></i> <i class="fa fa-angle-right"></i></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- section-heading end -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="features-tab">
+					  <!-- Nav tabs -->
+					  <!-- Tab panes -->
+					  <div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="home">
+							<div class="row">
+								<div class="features-curosel">
+                                    {% for product in special_category_products.product.all %}
+                                        <!-- single-product start -->
+                                        <div class="col-lg-3 col-md-3">
+                                            <div class="single-product">
+                                                {% if product.discount_price %}
+                                                    <span class="sale-text">Sale</span>
+                                                {% endif %}
+                                                <div class="product-img">
+                                                    <a href="#">
+                                                        <img class="primary-image" src="{% thumbnail product.preview_image 480x606 crop='smart' %}" alt="" />
+                                                    </a>
+                                                    <div class="actions">
+                                                        <div class="action-buttons">
+                                                            <div class="add-to-cart">
+																<form action="{% url 'add_to_cart_alone_product' product.slug %}" method="post" class="add-to-cart-form">{% csrf_token %}
+																	<input type="hidden" name="total_price" value="{% if product.discount_price %}{{ product.price }}{% else %}{{ product.price }}{% endif %}">
+																	<input type="hidden" name="quantity" value="1">
+																	<input type="submit" value="Add to cart" id="add-to-cart-product">
+																</form>
+                                                            </div>
+															<div class="add-to-cart">
+																<form action="{% url 'add_product_to_wish_list' %}" method="post" class="add-to-wish-list-form">{% csrf_token %}
+																	<input type="hidden" name="slug" value="{{ product.slug }}">
+																	<input type="submit" value="to wishlist" id="add-to-cart-product">
+																</form>
+															</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content">
+                                                    <h2 class="product-name"><a href="#">{{ product.title }}</a></h2>
+                                                    <div class="price-box">
+                                                        {% if product.discount_price %}
+                                                            <span class="new-price">£{{ product.discount_price }}</span>
+                                                            <span class="old-price">£{{ product.price }}</span>
+                                                        {% else %}
+                                                            <span class="new-price">£{{ product.price }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- single-product end -->
+                                    {% endfor %}
+								</div>
+							</div>
+						</div>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- features-area end -->
+{% endifequal %}
+{% ifequal type_slider 'row2' %}
+    <!-- new-product-area start -->
+	<div class="new-product-area pad-60">
+		<div class="container">
+			<!-- section-heading start -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="section-heading">
+						<h1>{{ special_category_products.title }}</h1>
+						<div class="title-icon">
+							<span><i class="fa fa-angle-left"></i> <i class="fa fa-angle-right"></i></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- section-heading end -->
+			<div class="row">
+				<div class="features-curosel">
+                    {% for product in special_category_products.product.all %}
+					<!-- single-product start -->
+					<div class="col-lg-3 col-md-3">
+						<div class="single-product">
+                            {% if product.discount_price %}
+                                <span class="sale-text">Sale</span>
+                            {% endif %}
+							<div class="product-img">
+								<a href="#">
+									<img class="primary-image" src="{% thumbnail product.preview_image 480x606 crop='smart' %}" alt="" />
+								</a>
+								<div class="actions">
+									<div class="action-buttons">
+										<div class="add-to-cart">
+											<form action="{% url 'add_to_cart_alone_product' product.slug %}" method="post" class="add-to-cart-form">{% csrf_token %}
+												<input type="hidden" name="total_price" value="{% if product.discount_price %}{{ product.price }}{% else %}{{ product.price }}{% endif %}">
+												<input type="hidden" name="quantity" value="1">
+												<input type="submit" value="Add to cart" id="add-to-cart-product">
+											</form>
+										</div>
+										<div class="add-to-cart">
+											<form action="{% url 'add_product_to_wish_list' %}" method="post" class="add-to-wish-list-form">{% csrf_token %}
+												<input type="hidden" name="slug" value="{{ product.slug }}">
+												<input type="submit" value="to wishlist" id="add-to-cart-product">
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="product-content">
+								<h2 class="product-name"><a href="#">{{ product.title }}</a></h2>
+								<div class="price-box">
+                                    {% if product.discount_price %}
+                                        <span class="new-price">£{{ product.discount_price }}</span>
+                                        <span class="old-price">£{{ product.price }}</span>
+                                    {% else %}
+                                        <span class="new-price">£{{ product.price }}</span>
+                                    {% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+                    {% endfor %}
+					<!-- single-product end -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- new-product-area end -->
+{% endifequal %}
+{% ifequal type_slider 'grid' %}
+    	<!-- top-sells-area start -->
+	<div class="top-sells-area pad-60">
+		<div class="container">
+			<!-- section-heading start -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="section-heading">
+						<h1>{{ special_category_products.title }}</h1>
+						<div class="title-icon">
+							<span><i class="fa fa-angle-left"></i> <i class="fa fa-angle-right"></i></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- section-heading end -->
+			<div class="row">
+				<div class="top-sells-curosel">
+                    {% for product in special_category_products.product.all %}
+					<!-- single-product start -->
+					<div class="col-lg-3 col-md-3">
+						<div class="single-product first-sells">
+							<div class="product-img">
+								<a href="#">
+									<img class="primary-image" src="{% thumbnail product.preview_image 480x606 crop='smart' %}" alt="" />
+								</a>
+							</div>
+							<div class="product-content">
+								<div class="pro-info">
+									<h2 class="product-name"><a href="#">{{ product.title }}</a></h2>
+									<div class="price-box">
+										{% if product.discount_price %}
+											<span class="new-price">£{{ product.discount_price }}</span>
+											<span class="old-price">£{{ product.price }}</span>
+										{% else %}
+											<span class="new-price">{{ product.price }}</span>
+										{% endif %}
+									</div>
+								</div>
+								<div class="actions">
+									<div class="action-buttons">
+										<div class="add-to-cart">
+											<form action="{% url 'add_to_cart_alone_product' product.slug %}" method="post" class="add-to-cart-form">{% csrf_token %}
+												<input type="hidden" name="total_price" value="{% if product.discount_price %}{{ product.price }}{% else %}{{ product.price }}{% endif %}">
+												<input type="hidden" name="quantity" value="1">
+												<input type="submit" value="Add to cart" id="add-to-cart-product-mini">
+											</form>
+										</div>
+										<div class="add-to-cart">
+											<form action="{% url 'add_product_to_wish_list' %}" method="post" class="add-to-wish-list-form">{% csrf_token %}
+												<input type="hidden" name="slug" value="{{ product.slug }}">
+												<input type="submit" value="to wishlist" id="add-to-cart-product-mini">
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- single-product end -->
+				{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- top-sells-area end -->
+{% endifequal %}

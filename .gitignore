@@ -1,7 +1,10 @@
 .idea
 __pycache__
 env
+venv
 Lib
 Scripts
 db.sqlite3
 media
+.DS_Store
+

@@ -1,0 +1,99 @@
+{% extends 'shop/extends/base.html' %}
+{% load thumbnail %}
+{% block content %}
+	<!-- entry-header-area start -->
+    <div class="entry-header-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="entry-header" style="">
+                        <a href="{% url 'OrdersUser' %}"><h2 class="entry-title">My Account</h2></a>
+                        <a href="{% url 'EditProfile' %}"><h5>Edit profile</h5></a>
+                        <a href="{% url 'ChangePasswordProfile' %}"><h5>Change password</h5></a>
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center" style="margin: 15px;">
+        <h1 class="entry-title">Orders:</h1>
+    </div>
+
+    {% for order in orders %}
+    <div class="features-area" style="border-top: 1px solid #e1e1e1; padding: 20px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+                    <div class="text-center" style="padding: 10px;"><h3>Number order: №{{ order.id }}</h3></div>
+					<div class="features-tab">
+					  <!-- Tab panes -->
+					  <div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="home">
+							<div class="row">
+								<div class="features-curosel">
+                                    {% for order_item in order.order_items.all %}
+									<!-- single-product start -->
+									<div class="col-lg-3 col-md-3">
+										<div class="single-product">
+											<div class="product-img">
+												<a href="{{ order_item.product.get_absolute_url }}">
+                                                    <img class="primary-image" src="{% thumbnail order_item.product.preview_image 480x606 crop='smart' %}" alt="" />
+												</a>
+
+											</div>
+											<div class="product-content">
+												<h2 class="product-name"><a href="#">{{ order_item.product.title }}</a></h2>
+
+												<div class="price-box">
+													<span class="new-price">{{ order_item.price }}</span>
+													<span class=""> x {{ order_item.quantity }}</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- single-product end -->
+									{% endfor %}
+								</div>
+                                <div style="display: flex; justify-content: space-between;margin-left: 15px; margin-top: 15px;">
+                                    <div>
+                                        <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Date order: {{ order.date_create }}</span></div>
+                                        <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Is paid: {% if order.is_paid %} &#9989; {% else %} &#10060; {% endif %}</span></div>
+                                        <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Is apply coupon: {% if order.coupon %} &#9989; {% else %} &#10060; {% endif %}</span></div>
+                                    </div>
+                                    <div>
+                                        <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Total amount: {{ order.total_amount }}</span></div>
+                                        <div class="buttons-cart" style="margin-top: 15px;"><a href="{{ order.get_absolute_url }}">Detail</a></div>
+                                    </div>
+                                </div>
+							</div>
+						</div>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    {% endfor %}
+
+	<!-- entry-header-area end -->
+{#    	<div class="orders">#}
+{#		<div class="container">#}
+{#        {% for order in orders %}#}
+{#            <div style="background-color: red; height: 240px; margin: 15px;">#}
+{#                        {{ order.date_create }}#}
+{#                        {{ order.is_paid }}#}
+{#                        {{ order.order_notes }}#}
+{#                        {% for order_item in order.order_items.all %}#}
+{#                            <img src="{{ order_item.product.preview_image.url }}">#}
+{#                        {% endfor %}#}
+{#                    {% endfor %}#}
+{#            </div>#}
+{##}
+{#	</div>#}
+	<!-- cart-main-area start -->
+
+	<!-- cart-main-area end -->
+{% endblock %}

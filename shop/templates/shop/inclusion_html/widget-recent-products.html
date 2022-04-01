@@ -1,0 +1,27 @@
+{% load thumbnail %}
+<ul>
+{% for product in recent_products %}
+    <li>
+        <div class="single-product">
+            <div class="product-img">
+                <a href="{{ product.get_absolute_url }}">
+                    <img class="primary-image" src="{% thumbnail product.preview_image 480x606 crop='smart' %}" alt="" />
+                </a>
+            </div>
+            <div class="product-content">
+                <div class="pro-info">
+                    <h2 class="product-name"><a href="#">{{ product.title }}</a></h2>
+                    <div class="price-box">
+                        {% if product.discount_price %}
+                            <span class="new-price">£{{ product.discount_price }}</span>
+                            <span class="old-price">£{{ product.price }}</span>
+                        {% else %}
+                            <span class="new-price">£{{ product.price }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+{% endfor %}
+</ul>

@@ -1,0 +1,50 @@
+<!-- cart-total start -->
+<div class="cart-total">
+    <ul>
+        <li><a href="{% url 'CartProduct' %}"><span class="cart-icon"><i class="fa fa-shopping-cart"></i></span> <span class="cart-no">My cart: {{ cart|length }}</span></a>
+            <div class="mini-cart-content">
+{#                {% for item in cart %}#}
+{#                    {% with product=item.product %}#}
+{#                        <div class="cart-img-details">#}
+{#                            <div class="cart-img-photo">#}
+{#                                <a href="#"><img src="{{ product.preview_image.url }}" alt="" /></a>#}
+{#                                <span class="quantity">{{ product.quantity }}</span>#}
+{#                            </div>#}
+{#                            <div class="cart-img-contaent">#}
+{#                                <a href="#"><p>{{ product.title }}</p></a>#}
+{#                                {% if product.discount_price %}#}
+{#                                    <span class="new-price">£{{ item.discount_price }}</span>#}
+{#                                    <span class="old-price">£{{ product.price }}</span>#}
+{#                                {% else %}#}
+{#                                    <span class="new-price">£{{ product.price }}</span>#}
+{#                                {% endif %}#}
+{#                            </div>#}
+{#                            <div class="pro-del"><a href="#"><i class="fa fa-times-circle"></i></a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="clear"></div>#}
+{#                    {% endwith %}#}
+{#                {% endfor %}#}
+{#                <div class="cart-img-details">#}
+{#                    <div class="cart-img-photo">#}
+{#                        <a href="#"><img src="../../static/core/img/product/total-cart.jpg" alt="" /></a>#}
+{#                        <span class="quantity">1</span>#}
+{#                    </div>#}
+{#                    <div class="cart-img-contaent">#}
+{#                        <a href="#"><p>Vestibulum suscipit</p></a>#}
+{#                        <span>£165.00</span>#}
+{#                    </div>#}
+{#                    <div class="pro-del"><a href="#"><i class="fa fa-times-circle"></i></a>#}
+{#                    </div>#}
+{#                </div>#}
+                <div class="clear"></div>
+                <div class="cart-inner-bottom">
+                    <p class="total">Subtotal: <span class="amount">£{{ cart.get_total_price }}</span></p>
+                    <div class="clear"></div>
+                    <p class="cart-button-top"><a href="{% url 'Checkout' %}">Checkout</a></p>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<!-- cart-total end -->
