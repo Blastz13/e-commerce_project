@@ -4,7 +4,7 @@
 
 Вы можете склонировать данное приложение:
 
-```bash
+```bash 
 git clone https://github.com/Blastz13/e-commerce_project.git
 ```
 
