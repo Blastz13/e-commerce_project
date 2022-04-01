@@ -6,3 +6,5 @@ Lib
 Scripts
 db.sqlite3
 media
+.DS_Store
+
