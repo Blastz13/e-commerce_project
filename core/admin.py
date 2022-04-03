@@ -9,6 +9,7 @@ from .models import CategoryFeed
 from .models import ContactForm
 from .models import ContactAddress
 
+
 @admin.register(OurBrand)
 class AdminOurBrand(admin.ModelAdmin):
     list_display = ['title', 'get_image', 'order']
@@ -35,6 +36,7 @@ class AdminComment(admin.ModelAdmin):
     list_display_links = ['email', 'name', 'text', 'date_publicate']
     search_fields = ('email', 'name', 'text', 'date_publicate',)
     readonly_fields = ('date_publicate',)
+
 
 class СommentItemInline(admin.TabularInline):
     model = Comment

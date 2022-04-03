@@ -1,3 +1,4 @@
+from django.core.validators import MaxValueValidator
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.shortcuts import reverse
@@ -156,7 +157,7 @@ class SpecialCategoryProduct(models.Model):
 
 class Coupon(models.Model):
     code = models.CharField(max_length=16, unique=True, verbose_name='Купон')
-    discount = models.PositiveIntegerField(max_length=100, verbose_name='Скидка %')
+    discount = models.PositiveIntegerField(validators=[MaxValueValidator(100)], verbose_name='Скидка %')
     minimum_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Минимальная сумма активации')
     quantity_activation = models.PositiveIntegerField(verbose_name='Количество активаций')
     active_from = models.DateTimeField(verbose_name='Активен от')
