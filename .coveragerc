@@ -11,4 +11,7 @@ omit=
     */apps.py
     */manage.py
     */manage_dev.py
+    */settings.py
+    */settings_dev.py
+    */tests.py
 
