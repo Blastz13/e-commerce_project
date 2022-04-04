@@ -5,6 +5,9 @@
 __pycache__
 db.sqlite3
 media
+.coverage
+htmlcov/
+
 
 # Backup files #
 *.bak
