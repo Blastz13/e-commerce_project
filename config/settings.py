@@ -19,7 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '_10-w7(dz_r+_)o4mng30&=324$ts0m6-si1zeacajgses-60m'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -88,11 +88,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
      'default': {
      'ENGINE': 'django.db.backends.postgresql_psycopg2',
-     'NAME': 'django_shop_db',
-     'USER': 'django_shop',
-     'PASSWORD': 'password',
-     'HOST': 'localhost',
-     'PORT': '5432',
+     'NAME': os.getenv("NAME_DB"),
+     'USER': os.getenv("USER_DB"),
+     'PASSWORD': os.getenv("PASSWORD_DB"),
+     'HOST': os.getenv("HOST_DB"),
+     'PORT': os.getenv("PORT_DB"),
  }
 }
 
@@ -144,10 +144,10 @@ CKEDITOR_CONFIGS = {
 }
 
 # settings email
-EMAIL_HOST = 'smtp.mail.ru'
-EMAIL_PORT = 2525
-EMAIL_HOST_USER = "django_shop@mail.ru"
-EMAIL_HOST_PASSWORD = "ipm-dTu2TP8Y"
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 
 #settings request.session cart
