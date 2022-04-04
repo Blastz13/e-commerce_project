@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from .models import Feed, CategoryFeed
+from .models import Feed, CategoryFeed, Comment
 
 
 class TestHomePage(TestCase):
@@ -27,6 +27,15 @@ class TestFeedDetail(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'core/blog-post-img.html')
+
+    def test_create_comment_FeedDetail(self):
+        """Checking the creation of a news comment"""
+        response = self.client.post(self.feed.get_absolute_url(), data={"email": "test@mail.ru",
+                                                                        "name": "Test_User", "text": "Good Luck!"})
+        comment = Comment.objects.get(email="test@mail.ru", name="Test_User")
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(str(comment), "Test_User - Hot news")
 
     def tearDown(self):
         self.feed.delete()
