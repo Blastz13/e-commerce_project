@@ -5,7 +5,7 @@
 								<div class="single-product">
 									<span class="sale-text">Sale</span>
 									<div class="product-img">
-										<a href="#">
+										<a href="{{ product.get_absolute_url }}">
 											<img class="primary-image" src="{% thumbnail product.preview_image 480x606 crop='smart' %}" alt="">
 											<img class="secondary-image" src="img/product/18.jpg" alt="">
 										</a>
@@ -30,16 +30,14 @@
 										</div>
 									</div>
 									<div class="product-content">
-										<h2 class="product-name"><a href="#">Convallis quam sit</a></h2>
-										<div class="pro-rating">
-											<a href="#"><i class="fa fa-star"></i></a>
-											<a href="#"><i class="fa fa-star"></i></a>
-											<a href="#"><i class="fa fa-star"></i></a>
-											<a href="#"><i class="fa fa-star"></i></a>
-											<a href="#"><i class="fa fa-star"></i></a>
-										</div>
+										<h2 class="product-name"><a href="#">{{ product.title }}</a></h2>
 										<div class="price-box">
-											<span class="new-price">£90.00</span>
+											{% if product.discount_price %}
+												<span class="new-price">£{{ product.discount_price }}</span>
+												<span class="old-price">£{{ product.price }}</span>
+											{% else %}
+												<span class="new-price">£{{ product.price }}</span>
+											{% endif %}
 										</div>
 									</div>
 								</div>
