@@ -1,0 +1,14 @@
+[run]
+omit=
+    */env/*
+    */venv/*
+    */static/*
+    */media/*
+    */migrations/*
+    */__init__.py
+    */asgi.py
+    */wsgi.py
+    */apps.py
+    */manage.py
+    */manage_dev.py
+
