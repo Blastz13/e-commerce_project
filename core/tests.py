@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from .models import Feed, CategoryFeed, Comment
+from .models import Feed, CategoryFeed, Comment, Tag
 
 
 class TestHomePage(TestCase):
@@ -40,3 +40,45 @@ class TestFeedDetail(TestCase):
     def tearDown(self):
         self.feed.delete()
         self.category.delete()
+
+
+class TestFeedList(TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    def test_FeedList_get(self):
+        """Page retrieval check FeedList"""
+        response = self.client.get(reverse('FeedList'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'core/blog.html')
+
+
+class TestFeedListCategory(TestCase):
+    def setUp(self):
+        self.cateforyfeed = CategoryFeed.objects.create(title="Test_Category", slug="test_category")
+
+    def test_FeedListCategory_get(self):
+        """Page retrieval check FeedListCategory"""
+        response = self.client.get(self.cateforyfeed.get_absolute_url())
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'core/blog.html')
+
+    def tearDown(self):
+        self.cateforyfeed.delete()
+
+
+class TestFeedListTag(TestCase):
+    def setUp(self):
+        self.tag = Tag.objects.create(title="Test_Tag", slug="test_tag")
+
+    def test_FeedListTag_get(self):
+        """Page retrieval check FeedListTag"""
+        response = self.client.get(self.tag.get_absolute_url())
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'core/blog-filter-by-tags.html')
+
+    def tearDown(self):
+        self.tag.delete()
