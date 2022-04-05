@@ -72,17 +72,17 @@ class TestFeedList(TestCase):
 
 class TestFeedListCategory(TestCase):
     def setUp(self):
-        self.cateforyfeed = CategoryFeed.objects.create(title="Test_Category", slug="test_category")
+        self.category_feed = CategoryFeed.objects.create(title="Test_Category", slug="test_category")
 
     def test_FeedListCategory_get(self):
         """Page retrieval check FeedListCategory"""
-        response = self.client.get(self.cateforyfeed.get_absolute_url())
+        response = self.client.get(self.category_feed.get_absolute_url())
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'core/blog.html')
 
     def tearDown(self):
-        self.cateforyfeed.delete()
+        self.category_feed.delete()
 
 
 class TestFeedListTag(TestCase):
