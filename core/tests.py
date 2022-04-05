@@ -1,13 +1,14 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from .models import Feed, CategoryFeed, Comment, Tag, ContactAddress, ContactForm
+from .models import Feed, CategoryFeed, Comment, \
+                    Tag, ContactForm
 
 
-class TestHomePage(TestCase):
+class TestViewHomePage(TestCase):
     def setUp(self):
         self.client = Client()
 
-    def test_HomePage_get(self):
+    def test_request_get(self):
         """Page retrieval check HomePage"""
         response = self.client.get(reverse('HomePage'))
 
@@ -15,20 +16,20 @@ class TestHomePage(TestCase):
         self.assertTemplateUsed(response, 'core/index.html')
 
 
-class TestFeedDetail(TestCase):
+class TestViewFeedDetail(TestCase):
     def setUp(self):
         self.category = CategoryFeed.objects.create(title="HOT_NEWS", slug="hot_news")
         self.feed = Feed.objects.create(title="Hot news", body="Lorem Ipsum", slug="hot_news",
                                         category=self.category, is_slider=True, is_publish=True, is_blog=True)
 
-    def test_FeedDetail_get(self):
+    def test_request_get(self):
         """Page retrieval check FeedDetail"""
         response = self.client.get(self.feed.get_absolute_url())
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'core/blog-post-img.html')
 
-    def test_create_comment_FeedDetail(self):
+    def test_create_comment_post(self):
         """Checking the creation of a news comment"""
         response = self.client.post(self.feed.get_absolute_url(), data={
             "email": "test@mail.ru",
@@ -40,7 +41,8 @@ class TestFeedDetail(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(str(comment), "Test_User - Hot news")
 
-    def test_create_comment_with_parent(self):
+    def test_create_comment_with_parent_post(self):
+        """Checking the creation of news comment with parent"""
         comment_parent = Comment.objects.create(email="test1@mail.ru", name="Test_User1", feed=self.feed)
         response = self.client.post(self.feed.get_absolute_url(), data={
             "email": "test2@mail.ru",
@@ -58,11 +60,11 @@ class TestFeedDetail(TestCase):
         self.category.delete()
 
 
-class TestFeedList(TestCase):
+class TestViewFeedList(TestCase):
     def setUp(self):
         self.client = Client()
 
-    def test_FeedList_get(self):
+    def test_request_get(self):
         """Page retrieval check FeedList"""
         response = self.client.get(reverse('FeedList'))
 
@@ -70,11 +72,11 @@ class TestFeedList(TestCase):
         self.assertTemplateUsed(response, 'core/blog.html')
 
 
-class TestFeedListCategory(TestCase):
+class TestViewFeedListCategory(TestCase):
     def setUp(self):
         self.category_feed = CategoryFeed.objects.create(title="Test_Category", slug="test_category")
 
-    def test_FeedListCategory_get(self):
+    def test_request_get(self):
         """Page retrieval check FeedListCategory"""
         response = self.client.get(self.category_feed.get_absolute_url())
 
@@ -85,11 +87,11 @@ class TestFeedListCategory(TestCase):
         self.category_feed.delete()
 
 
-class TestFeedListTag(TestCase):
+class TestViewFeedListTag(TestCase):
     def setUp(self):
         self.tag = Tag.objects.create(title="Test_Tag", slug="test_tag")
 
-    def test_FeedListTag_get(self):
+    def test_request_get(self):
         """Page retrieval check FeedListTag"""
         response = self.client.get(self.tag.get_absolute_url())
 
@@ -100,24 +102,15 @@ class TestFeedListTag(TestCase):
         self.tag.delete()
 
 
-class TestLeaveMessage(TestCase):
-    def test_create_contact_adress(self):
-        """"Checking creation contact_adress"""
-        self.contact_address = ContactAddress.objects.create(
-            title="Our_Test_Contacts",
-            address="Test Adress",
-            phone="+7-909-09-09"
-        )
-        self.assertEqual(self.contact_address.title, "Our_Test_Contacts")
-
-    def test_LeaveMessage_get(self):
+class TestViewLeaveMessage(TestCase):
+    def test_request_get(self):
         """Page retrieval check LeaveMessage"""
         response = self.client.get(reverse('LeaveMessage'))
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'core/contact.html')
 
-    def test_send_contact_message(self):
+    def test_send_contact_message_post(self):
         """"Checking contact message creation"""
         response = self.client.post(reverse('LeaveMessage'), data={
             "email": "test@mail.ru",
