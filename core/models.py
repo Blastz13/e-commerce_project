@@ -115,7 +115,7 @@ class ContactForm(models.Model):
     date_send = models.DateTimeField(auto_now_add=True, verbose_name='Дата отправки')
 
     def __str__(self):
-        return "{0} - {1}, {2}".format(self.email, self.subject, self.date_send)
+        return "{0} - {1}".format(self.email, self.subject)
 
     class Meta:
         ordering = ['-date_send']
