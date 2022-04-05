@@ -40,6 +40,19 @@ class TestFeedDetail(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(str(comment), "Test_User - Hot news")
 
+    def test_create_comment_with_parent(self):
+        comment_parent = Comment.objects.create(email="test1@mail.ru", name="Test_User1", feed=self.feed)
+        response = self.client.post(self.feed.get_absolute_url(), data={
+            "email": "test2@mail.ru",
+            "name": "Test_User2",
+            "text": "Good Luck2!",
+            "parent": comment_parent.id
+        })
+
+        self.assertEqual(response.status_code, 302)
+        self.assertIsNotNone(Comment.objects.get(email="test2@mail.ru", name="Test_User2", text="Good Luck2!",
+                                                 parent=comment_parent.id))
+
     def tearDown(self):
         self.feed.delete()
         self.category.delete()
