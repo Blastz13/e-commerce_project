@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from .models import Feed, CategoryFeed, Comment, Tag
+from .models import Feed, CategoryFeed, Comment, Tag, ContactAddress, ContactForm
 
 
 class TestHomePage(TestCase):
@@ -30,8 +30,11 @@ class TestFeedDetail(TestCase):
 
     def test_create_comment_FeedDetail(self):
         """Checking the creation of a news comment"""
-        response = self.client.post(self.feed.get_absolute_url(), data={"email": "test@mail.ru",
-                                                                        "name": "Test_User", "text": "Good Luck!"})
+        response = self.client.post(self.feed.get_absolute_url(), data={
+            "email": "test@mail.ru",
+            "name": "Test_User",
+            "text": "Good Luck!"
+        })
         comment = Comment.objects.get(email="test@mail.ru", name="Test_User")
 
         self.assertEqual(response.status_code, 302)
@@ -82,3 +85,34 @@ class TestFeedListTag(TestCase):
 
     def tearDown(self):
         self.tag.delete()
+
+
+class TestLeaveMessage(TestCase):
+    def test_create_contact_adress(self):
+        """"Checking creation contact_adress"""
+        self.contact_address = ContactAddress.objects.create(
+            title="Our_Test_Contacts",
+            address="Test Adress",
+            phone="+7-909-09-09"
+        )
+        self.assertEqual(self.contact_address.title, "Our_Test_Contacts")
+
+    def test_LeaveMessage_get(self):
+        """Page retrieval check LeaveMessage"""
+        response = self.client.get(reverse('LeaveMessage'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'core/contact.html')
+
+    def test_send_contact_message(self):
+        """"Checking contact message creation"""
+        response = self.client.post(reverse('LeaveMessage'), data={
+            "email": "test@mail.ru",
+            "name": "Test_User",
+            "subject": "Test_Subject",
+            "message": "Good Luck!"
+        })
+        contact = ContactForm.objects.get(email="test@mail.ru", name="Test_User")
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(str(contact), "test@mail.ru - Test_Subject")
