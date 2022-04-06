@@ -7,9 +7,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="entry-header" style="">
-                        <a href="{% url 'OrdersUser' %}"><h2 class="entry-title">My Account</h2></a>
-                        <a href="{% url 'EditProfile' %}"><h5>Edit profile</h5></a>
-                        <a href="{% url 'ChangePasswordProfile' %}"><h5>Change password</h5></a>
+                        <a href="{% url 'OrdersUser' %}"><h2 class="entry-title">Мой Аккаунт</h2></a>
+                        <a href="{% url 'EditProfile' %}"><h5>Редактировать профиль</h5></a>
+                        <a href="{% url 'ChangePasswordProfile' %}"><h5>Сменить пароль</h5></a>
                         {% for message in messages %}
                             {{ message }}
                         {% endfor %}
@@ -27,7 +27,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-                    <div class="text-center" style="padding: 10px;"><h3>Number order: №{{ order.id }}</h3></div>
+                    <div class="text-center" style="padding: 10px;"><h3>Номер заказа: №{{ order.id }}</h3></div>
 					<div class="features-tab">
 					  <!-- Tab panes -->
 					  <div class="tab-content">
@@ -49,6 +49,7 @@
 
 												<div class="price-box">
 													<span class="new-price">{{ order_item.price }}</span>
+														<!-- TODO: 'x' -->
 													<span class=""> x {{ order_item.quantity }}</span>
 												</div>
 											</div>
@@ -59,13 +60,13 @@
 								</div>
                                 <div style="display: flex; justify-content: space-between;margin-left: 15px; margin-top: 15px;">
                                     <div>
-                                        <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Date order: {{ order.date_create }}</span></div>
-                                        <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Is paid: {% if order.is_paid %} &#9989; {% else %} &#10060; {% endif %}</span></div>
-                                        <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Is apply coupon: {% if order.coupon %} &#9989; {% else %} &#10060; {% endif %}</span></div>
+                                        <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Дата заказа: {{ order.date_create }}</span></div>
+                                        <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Оплачен: {% if order.is_paid %} &#9989; {% else %} &#10060; {% endif %}</span></div>
+                                        <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Применен купон: {% if order.coupon %} &#9989; {% else %} &#10060; {% endif %}</span></div>
                                     </div>
                                     <div>
-                                        <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Total amount: {{ order.total_amount }}</span></div>
-                                        <div class="buttons-cart" style="margin-top: 15px;"><a href="{{ order.get_absolute_url }}">Detail</a></div>
+                                        <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Стоимость: {{ order.total_amount }}</span></div>
+                                        <div class="buttons-cart" style="margin-top: 15px;"><a href="{{ order.get_absolute_url }}">Детали</a></div>
                                     </div>
                                 </div>
 							</div>

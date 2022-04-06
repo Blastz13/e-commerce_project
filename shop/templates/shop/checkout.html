@@ -6,7 +6,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="entry-header">
-						<h1 class="entry-title">Checkout</h1>
+						<h1 class="entry-title">Оплата</h1>
 					</div>
 				</div>
 			</div>
@@ -21,41 +21,41 @@
 				<div class="col-md-12">
 					<div class="coupon-accordion">
 						<!-- ACCORDION START -->
-						<h3>Returning customer? <span id="showlogin">Click here to login</span></h3>
+						<h3>Уже покупали у нас? <span id="showlogin">Нажмите, чтобы авторизоваться</span></h3>
 						<div id="checkout-login" class="coupon-content">
 							<div class="coupon-info">
 								<p class="coupon-text">Quisque gravida turpis sit amet nulla posuere lacinia. Cras sed est sit amet ipsum luctus.</p>
 								<form action="">
 									<p class="form-row-first">
-										<label>Username or email <span class="required">*</span></label>
+										<label>Логин или email <span class="required">*</span></label>
 										<input type="text" />
 									</p>
 									<p class="form-row-last">
-										<label>Password  <span class="required">*</span></label>
+										<label>Пароль  <span class="required">*</span></label>
 										<input type="text" />
 									</p>
 									<p class="form-row">					
-										<input type="submit" value="Login" />
+										<input type="submit" value="Войти" />
 										<label>
 											<input type="checkbox" />
-											 Remember me 
+											 Запомнить меня 
 										</label>
 									</p>
 									<p class="lost-password">
-										<a href="#">Lost your password?</a>
+										<a href="#">Забыли пароль?</a>
 									</p>
 								</form>
 							</div>
 						</div>
 						<!-- ACCORDION END -->	
 						<!-- ACCORDION START -->
-						<h3>Have a coupon? <span id="showcoupon">Click here to enter your code</span></h3>
+						<h3>Есть купон? <span id="showcoupon">Нажмите, чтобы ввести</span></h3>
 						<div id="checkout_coupon" class="coupon-checkout-content">
 							<div class="coupon-info">
 								<form action="#">
 									<p class="checkout-coupon">
-										<input type="text" placeholder="Coupon code" />
-										<input type="submit" value="Apply Coupon" />
+										<input type="text" placeholder="Купон" />
+										<input type="submit" value="Применить" />
 									</p>
 								</form>
 							</div>
@@ -74,7 +74,7 @@
 				<form action="{% url 'Checkout' %}" method="post">{% csrf_token %}
 					<div class="col-lg-6 col-md-6">
 						<div class="checkbox-form">						
-							<h3>Billing Details</h3>
+							<h3>Детали оплаты</h3>
 							<div class="row">
                                 {% for field in form %}
                                     <div class="col-md-6">
@@ -89,13 +89,13 @@
 					</div>	
 					<div class="col-lg-6 col-md-6">
 						<div class="your-order">
-							<h3>Your order</h3>
+							<h3>Ваш заказ</h3>
 							<div class="your-order-table table-responsive">
 								<table>
 									<thead>
 										<tr>
-											<th class="product-name">Product</th>
-											<th class="product-total">Total</th>
+											<th class="product-name">Товар</th>
+											<th class="product-total">Всего</th>
 										</tr>							
 									</thead>
 									<tbody>
@@ -106,7 +106,7 @@
                                                     {{ product.title }} <strong class="product-quantity"> × {{ item.quantity }}</strong>
                                                 </td>
                                                 <td class="product-total">
-                                                    <span class="amount">£{{ item.total_price }}</span>
+                                                    <span class="amount">₽{{ item.total_price }}</span>
                                                 </td>
                                             </tr>
                                             {% endwith %}
@@ -114,30 +114,30 @@
 									</tbody>
 									<tfoot>
 										<tr class="cart-subtotal">
-											<th>Cart Subtotal</th>
-											<td><span class="amount">£{{ cart.get_total_price }}</span></td>
+											<th>Итого в корзине</th>
+											<td><span class="amount">₽{{ cart.get_total_price }}</span></td>
 										</tr>
 										<tr class="shipping">
-											<th>Shipping</th>
+											<th>Доставка</th>
 											<td>
 												<ul>
 													<li>
 														<input type="radio" />
 														<label>
-															Flat Rate: <span class="amount">£7.00</span>
+															Ставка: <span class="amount">£7.00</span>
 														</label>
 													</li>
 													<li>
 														<input type="radio" />
-														<label>Free Shipping:</label>
+														<label>Бесплатная доставка:</label>
 													</li>
 													<li></li>
 												</ul>
 											</td>
 										</tr>
 										<tr class="order-total">
-											<th>Order Total</th>
-											<td><strong><span class="amount">£{{ cart.get_total_price }}</span></strong>
+											<th>Стоимость</th>
+											<td><strong><span class="amount">₽{{ cart.get_total_price }}</span></strong>
 											</td>
 										</tr>								
 									</tfoot>
@@ -146,26 +146,26 @@
 							<div class="payment-method">
 								<div class="payment-accordion">
 									<!-- ACCORDION START -->
-									<h3>Direct Bank Transfer</h3>
+									<h3>Прямой банковский перевод</h3>
 									<div class="payment-content">
-										<p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+										<p>Произведите оплату непосредственно на наш банковский счет. Пожалуйста, используйте свой идентификатор заказа в качестве ссылки на платеж. Ваш заказ не будет отправлен, пока средства не поступят на наш счет.</p>
 									</div>
 									<!-- ACCORDION END -->	
 									<!-- ACCORDION START -->
-									<h3>Cheque Payment</h3>
+									<h3>Оплата чеком</h3>
 									<div class="payment-content">
-										<p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
+										<p>Пожалуйста, отправьте чек на имя магазина, улицу магазина, город магазина, штат/округ магазина, почтовый индекс магазина.</p>
 									</div>
 									<!-- ACCORDION END -->	
 									<!-- ACCORDION START -->
 									<h3>PayPal <img src="../../static/core/img/cart/payment.png" alt="" /></h3>
 									<div class="payment-content">
-										<p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
+										<p>Оплатить через PayPal; вы можете оплатить с помощью кредитной карты, если у вас нет учетной записи PayPal.</p>
 									</div>
 									<!-- ACCORDION END -->									
 								</div>
 								<div class="order-button-payment">
-									<input type="submit" value="Place order" />
+									<input type="submit" value="Разместить заказ" />
 								</div>
 							</div>
 						</div>

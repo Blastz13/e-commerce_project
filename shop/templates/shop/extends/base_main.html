@@ -75,7 +75,7 @@
 		============================================ -->
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>{% block title%}Blog{%endblock%}</title>
+        <title>{% block title%}Блог{%endblock%}</title>
         <meta name="description" content="">
 
 
@@ -96,8 +96,8 @@
 					<!-- header-top-left start -->
 					<div class="col-lg-6 col-md-6 col-sm-7">
 						<div class="header-top-left">
-							<div class="top-message">Default welcome message</div>
-							<div class="phone-number"> Call support free: <span>123 456  789</span></div>
+							<div class="top-message">Добро пожаловать</div>
+							<div class="phone-number"> Телефон: <span>123 456  789</span></div>
 						</div>
 					</div>
 					<!-- header-top-left end -->
@@ -111,13 +111,13 @@
 							</div>
 							<div class="top-menu">
 								<ul>
-									<li><a href="{% url 'OrdersUser' %}">My Account</a></li>
-									<li><a href="{% url 'WishList' %}">My Wishlist</a></li>
-									<li><a href="cart.html">Cart</a></li>
+									<li><a href="{% url 'OrdersUser' %}">Мой Аккаунт</a></li>
+									<li><a href="{% url 'WishList' %}">Список желаний</a></li>
+									<li><a href="cart.html">Корзина</a></li>
 									{% if request.user.is_authenticated %}
-									<li><a href="{% url 'Logout' %}">Logout</a></li>
+									<li><a href="{% url 'Logout' %}">Выйти</a></li>
                                     {% else %}
-                                    <li><a href="{% url 'Account' %}">Login</a></li>
+                                    <li><a href="{% url 'Account' %}">Авторизоваться</a></li>
                                     {% endif %}
 								</ul>
 							</div>
@@ -135,7 +135,7 @@
 					<!-- logo start -->
 					<div class="col-lg-6 col-md-6 col-sm-4 col-xs-12">
 						<div class="logo">
-							<a href="{% url 'HomePage' %}" style="font-size: 50px; color: white; font-weight: bold;"><img src="" alt="" />Shop Book</a>
+							<a href="{% url 'HomePage' %}" style="font-size: 50px; color: white; font-weight: bold;"><img src="" alt="" />Книжный магазин</a>
 						</div>
 					</div>
 					<!-- logo end -->
@@ -143,7 +143,7 @@
 						<!-- cart-total start -->
 						<div class="cart-total">
 							<ul>
-								<li><a href="cart.html"><span class="cart-icon"><i class="fa fa-shopping-cart"></i></span> <span class="cart-no">My cart: (2)</span></a>
+								<li><a href="cart.html"><span class="cart-icon"><i class="fa fa-shopping-cart"></i></span> <span class="cart-no">Корзина: (2)</span></a>
 									<div class="mini-cart-content">
 										<div class="cart-img-details">
 											<div class="cart-img-photo">
@@ -152,7 +152,7 @@
 											</div>
 											<div class="cart-img-contaent">
 												<a href="#"><p>Vestibulum suscipit</p></a>
-												<span>£165.00</span>
+												<span>₽165.00</span>
 											</div>
 											<div class="pro-del"><a href="#"><i class="fa fa-times-circle"></i></a>
 											</div>
@@ -165,15 +165,15 @@
 											</div>
 											<div class="cart-img-contaent">
 												<a href="#"><p>Donec sodales mauris in</p></a>
-												<span>£50.00</span>
+												<span>₽50.00</span>
 											</div>
 											<div class="pro-del"><a href="#"><i class="fa fa-times-circle"></i></a>
 											</div>
 										</div>
 										<div class="cart-inner-bottom">
-											<p class="total">Subtotal: <span class="amount">£215.00</span></p>
+											<p class="total">Всего: <span class="amount">₽215.00</span></p>
 											<div class="clear"></div>
-											<p class="cart-button-top"><a href="checkout.html">Checkout</a></p>
+											<p class="cart-button-top"><a href="checkout.html">Оплатить</a></p>
 										</div>
 									</div>
 								</li>
@@ -201,10 +201,10 @@
 						<div class="mainmenu">
 							<nav>
 								<ul>
-									<li><a href="{% url 'HomePage' %}">Home</a></li>
-									<li><a href="about-us.html">about</a></li>
-									<li><a href="{% url 'FeedList' %}">Blog</a></li>
-									<li><a href="shop.html">Shop</a>
+									<li><a href="{% url 'HomePage' %}">Главная</a></li>
+									<li><a href="about-us.html">О нас</a></li>
+									<li><a href="{% url 'FeedList' %}">Блог</a></li>
+									<li><a href="shop.html">Магазин</a>
 										<div class="mega-menu">
 											<span>
 												<a href="#" class="mega-title">WOMEN CLOTH </a>
@@ -232,24 +232,24 @@
 											</span>
 										</div>
 									</li>
-									<li><a href="#">Pages</a>
+									<li><a href="#">Страницы</a>
 										<ul class="sub-menu">
-											<li><a href="about-us.html">about us</a></li>
-											<li><a href="{% url 'LeaveMessage' %}">contact us</a></li>
-											<li><a href="shop.html">shop grid</a></li>
-											<li><a href="shop-list.html">shop list</a></li>
-											<li><a href="product-virtual.html">product Details</a></li>
-											<li><a href="blog.html">blog</a></li>
-											<li><a href="blog-post-img.html">blog details</a></li>
-											<li><a href="cart.html">shopping cart</a></li>
-											<li><a href="checkout.html">checkout</a></li>
-											<li><a href="wishlist.html">wishlist</a></li>
-											<li><a href="my-account.html">my-account</a></li>
-											<li><a href="404.html">404 page</a></li>
+											<li><a href="about-us.html">О нас</a></li>
+											<li><a href="{% url 'LeaveMessage' %}">Связаться</a></li>
+											<li><a href="shop.html">Сетка</a></li>
+											<li><a href="shop-list.html">Список магазинов</a></li>
+											<li><a href="product-virtual.html">Детали</a></li>
+											<li><a href="blog.html">Блог</a></li>
+											<li><a href="blog-post-img.html">Детали Блога</a></li>
+											<li><a href="cart.html">Корзина</a></li>
+											<li><a href="checkout.html">Оплатить</a></li>
+											<li><a href="wishlist.html">Список желаний</a></li>
+											<li><a href="my-account.html">Мой аккаунт</a></li>
+											<li><a href="404.html">404</a></li>
 										</ul>
 									</li>
 									<li><a href="shop.html">Footwear  </a></li>
-									<li><a href="{% url 'LeaveMessage' %}">Contact</a></li>
+									<li><a href="{% url 'LeaveMessage' %}">Связь</a></li>
 								</ul>
 							</nav>
 						</div>
@@ -266,26 +266,26 @@
 						<div class="mobile-menu">
 							<nav id="dropdown">
 								<ul>
-									<li><a href="{% url 'HomePage' %}">Home</a></li>
-									<li><a href="{% url 'FeedList' %}">blog</a></li>
-									<li><a href="shop.html">Shop</a></li>
-									<li><a href="#">Pages</a>
+									<li><a href="{% url 'HomePage' %}">Главная</a></li>
+									<li><a href="{% url 'FeedList' %}">Блог</a></li>
+									<li><a href="shop.html">Магазин</a></li>
+									<li><a href="#">Страницы</a>
 										<ul>
-											<li><a href="about-us.html">about us</a></li>
-											<li><a href="{% url 'LeaveMessage' %}">contact us</a></li>
-											<li><a href="shop.html">shop grid</a></li>
-											<li><a href="shop-list.html">shop list</a></li>
-											<li><a href="product-virtual.html">product Details</a></li>
-											<li><a href="{% url 'FeedList' %}l">blog</a></li>
-											<li><a href="blog-post-img.html">blog details</a></li>
-											<li><a href="cart.html">shopping cart</a></li>
-											<li><a href="checkout.html">checkout</a></li>
-											<li><a href="wishlist.html">wishlist</a></li>
-											<li><a href="my-account.html">my-account</a></li>
-											<li><a href="404.html">404 page</a></li>
+											<li><a href="about-us.html">О нас</a></li>
+											<li><a href="{% url 'LeaveMessage' %}">Связаться</a></li>
+											<li><a href="shop.html">Сетка</a></li>
+											<li><a href="shop-list.html">Список магазинов</a></li>
+											<li><a href="product-virtual.html">Детали</a></li>
+											<li><a href="{% url 'FeedList' %}l">Блог</a></li>
+											<li><a href="blog-post-img.html">Детали блога</a></li>
+											<li><a href="cart.html">Корзина</a></li>
+											<li><a href="checkout.html">Оплатить</a></li>
+											<li><a href="wishlist.html">Список желаний</a></li>
+											<li><a href="my-account.html">Мой Аккаунт</a></li>
+											<li><a href="404.html">404</a></li>
 										</ul>
 									</li>
-									<li><a href="{% url 'LeaveMessage' %}">Contact</a></li>
+									<li><a href="{% url 'LeaveMessage' %}">Связь</a></li>
 								</ul>
 							</nav>
 						</div>
@@ -320,13 +320,13 @@
 					<!-- footer-widget start -->
 					<div class="col-lg-3 col-md-3 hidden-sm">
 						<div class="footer-widget">
-							<h3>Our services</h3>
+							<h3>Наши службы</h3>
 							<ul class="footer-menu">
-								<li><a href="#">Shipping & Returns</a></li>
-								<li><a href="#">Secure Shopping</a></li>
-								<li><a href="#">International Shipping</a></li>
-								<li><a href="#">Affiliates</a></li>
-								<li><a href="#">Contact</a></li>
+								<li><a href="#">Доставка и Возвраты</a></li>
+								<li><a href="#">Безопасный шоппинг</a></li>
+								<li><a href="#">Международная доставка</a></li>
+								<li><a href="#">Филиалы</a></li>
+								<li><a href="#">Связь</a></li>
 							</ul>
 						</div>
 					</div>
@@ -334,13 +334,13 @@
 					<!-- footer-widget start -->
 					<div class="col-lg-3 col-md-3 col-sm-4">
 						<div class="footer-widget">
-							<h3>Our services</h3>
+							<h3>Наши службы</h3>
 							<ul class="footer-menu">
-								<li><a href="#">Shipping & Returns</a></li>
-								<li><a href="#">Secure Shopping</a></li>
-								<li><a href="#">International Shipping</a></li>
-								<li><a href="#">Affiliates</a></li>
-								<li><a href="#">Contact</a></li>
+								<li><a href="#">Доставка и Возвраты</a></li>
+								<li><a href="#">Безопасный шоппинг</a></li>
+								<li><a href="#">Международная доставка</a></li>
+								<li><a href="#">Филиалы</a></li>
+								<li><a href="#">Связь</a></li>
 							</ul>
 						</div>
 					</div>
@@ -348,19 +348,19 @@
 					<!-- footer-widget start -->
 					<div class="col-lg-3 col-md-3 col-sm-4">
 						<div class="footer-widget">
-							<h3>CONTACT US</h3>
+							<h3>СВЯЖИТЕСЬ С НАМИ</h3>
 							<ul class="footer-contact">
 								<li>
 									<i class="fa fa-map-marker"> </i>
-									Addresss: 123 Pall Mall, London England
+									Адрес: Россия, г. Москва
 								</li>
 								<li>
 									<i class="fa fa-envelope"> </i>
-									Email: admin@themepure.net
+									Email: dzerzhinskij@mirea.ru
 								</li>
 								<li>
 									<i class="fa fa-phone"> </i>
-									Phone: +8801912 199981
+									Телефон: +8801912 199981
 								</li>
 							</ul>
 						</div>
@@ -376,7 +376,7 @@
 				<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="copyright">
-							<p>Copyright © <a href="#">ThemePure</a>. All Rights Reserved</p>
+							<p>Copyright © <a href="#">ThemePure</a>. Все Права Зарезервированы</p>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6">

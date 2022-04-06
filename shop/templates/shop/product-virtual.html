@@ -49,17 +49,17 @@
 						<h1 class="product_title">{{ product.title }}</h1>
 						<div class="price-box">
                             {% if product.discount_price %}
-                                <span>£</span><span class="new-price" id="new-price">{{ product.discount_price }}</span>
-                                <span class="old-price">£{{ product.price }}</span>
+                                <span>₽</span><span class="new-price" id="new-price">{{ product.discount_price }}</span>
+                                <span class="old-price">₽{{ product.price }}</span>
                             {% else %}
-                                <span>£</span><span class="new-price" id="new-price">{{ product.price }}</span>
+                                <span>₽</span><span class="new-price" id="new-price">{{ product.price }}</span>
                             {% endif %}
 						</div>
 						<div class="short-description">
 							<p>{{ product.description| truncatewords:20 }}</p>
 						</div>
 						<div class="stock-status">
-                            <label>Availability</label>: {% if product.is_available %}<strong>In stock</strong>{% else %}<strong>not available</strong>{% endif %}
+                            <label>Статус</label>: {% if product.is_available %}<strong>В наличии</strong>{% else %}<strong>Нет в наличии</strong>{% endif %}
 						</div>
                         {% for error in form.non_field_errors %}
                             <li style="color: red">{{ error }}</li>
@@ -72,7 +72,7 @@
                                 </div>
                             {% endfor %}
                             <div class="quantity">
-								<button type="submit">Add to cart</button>
+								<button type="submit">Добавить в корзину</button>
 							</div>
 						</form>
 						<div class="add-to-wishlist" id="123">
@@ -98,8 +98,8 @@
 						<div>
 						  <!-- Nav tabs -->
 						  <ul class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="active"><a href="#tab-desc" aria-controls="tab-desc" role="tab" data-toggle="tab">Description</a></li>
-							<li role="presentation"><a href="#page-comments" aria-controls="page-comments" role="tab" data-toggle="tab">Reviews ({{ product.comments.all.count }})</a></li>
+							<li role="presentation" class="active"><a href="#tab-desc" aria-controls="tab-desc" role="tab" data-toggle="tab">Описание</a></li>
+							<li role="presentation"><a href="#page-comments" aria-controls="page-comments" role="tab" data-toggle="tab">Отзывы ({{ product.comments.all.count }})</a></li>
 						  </ul>
 						  <!-- Tab panes -->
 						  <div class="tab-content">
@@ -111,7 +111,7 @@
 							<div role="tabpanel" class="tab-pane" id="page-comments">
 								<div class="product-tab-desc">
 									<div class="product-page-comments">
-										<h2>{{ product.comments.all.count }} review for Integer consequat ante lectus</h2>
+										<h2>{{ product.comments.all.count }} отзыв на Integer consequat ante lectus</h2>
 										<ul>
                                             {% for comment in product.comments.all %}
                                                 <li>
@@ -130,12 +130,12 @@
                                             {% endfor %}
 										</ul>
 										<div class="review-form-wrapper">
-											<h3>Add a review</h3>
+											<h3>Добавить отзыв</h3>
 											<form action="{% url 'AddProductComment' product.slug %}" method="post">{% csrf_token %}
 												{{ form_product_comment.name }}
 												{{ form_product_comment.email }}
 												{{ form_product_comment.text }}
-												<input type="submit" value="submit" />
+												<input type="submit" value="Сохранить" />
 											</form>
 										</div>
 									</div>
@@ -147,7 +147,7 @@
 					<div class="clear"></div>
 					<div class="upsells_products_widget">
 						<div class="section-heading">
-							<h3>Up-Sells</h3>
+							<h3>Допродажи</h3>
 							<div class="title-icon">
 								<span><i class="fa fa-angle-left"></i> <i class="fa fa-angle-right"></i></span>
 							</div>							
@@ -160,7 +160,7 @@
 				<div class="col-lg-3 col-md-3">
 					<!-- widget-recent start -->
 					<aside class="widget top-product-widget">
-						<h3 class="sidebar-title">Recent</h3>
+						<h3 class="sidebar-title">Недавние</h3>
 						{% widget_recent_products product %}
 					</aside>
 					<!-- widget-recent end -->				
@@ -176,7 +176,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="section-heading">
-						<h3>Our Brands</h3>
+						<h3>я не ебу</h3>
 						<div class="title-icon">
 							<span><i class="fa fa-angle-left"></i> <i class="fa fa-angle-right"></i></span>
 						</div>						

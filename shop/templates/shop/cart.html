@@ -6,7 +6,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="entry-header">
-						<h1 class="entry-title">Cart</h1>
+						<h1 class="entry-title">Корзина</h1>
                         {% for message in messages %}
                             {{ message }}
                         {% endfor %}
@@ -25,12 +25,12 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th class="product-thumbnail">Image</th>
-                                    <th class="product-name">Product</th>
-                                    <th class="product-price">Price</th>
-                                    <th class="product-quantity">Quantity</th>
-                                    <th class="product-subtotal">Total</th>
-                                    <th class="product-remove">Remove</th>
+                                    <th class="product-thumbnail">Изображение</th>
+                                    <th class="product-name">Товар</th>
+                                    <th class="product-price">Цена</th>
+                                    <th class="product-quantity">Количество</th>
+                                    <th class="product-subtotal">Всего</th>
+                                    <th class="product-remove">Убрать</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,9 +39,9 @@
                                 <tr>
                                     <td class="product-thumbnail"><a href="{{ product.get_absolute_url }}"><img src="{{ product.preview_image.url }}" alt="" /></a></td>
                                     <td class="product-name"><a href="{{ product.get_absolute_url }}"><p style="text-decoration: underline;">{{ product.title }}</p>{% for key, property in item.property.items %}<p>{{ key }} {{ property }}</p>{% endfor %}</a></td>
-                                    <td class="product-price"><span class="amount">£{{ item.price }}</span></td>
+                                    <td class="product-price"><span class="amount">₽{{ item.price }}</span></td>
                                     <td class="product-quantity"><input type="number" value="{{ item.quantity }}" /></td>
-                                    <td class="product-subtotal">£{{ item.total_price }}</td>
+                                    <td class="product-subtotal">₽{{ item.total_price }}</td>
                                     <td class="product-remove"><form action="{% url 'CartDel' slug=item.product_id %}" method="post">{% csrf_token %}<input type="submit" style="background: none;" value="&#10006;"></form></td>
                                 </tr>
                                 {% endwith %}
@@ -52,67 +52,67 @@
                     <div class="row">
                         <div class="col-md-8 col-sm-7 col-xs-12">
                             <div class="buttons-cart">
-                                <a href="{% url 'CartProduct' %}">Update cart</a>
-                                <a href="{% url 'ProductList' %}">Continue Shopping</a>
+                                <a href="{% url 'CartProduct' %}">Обновить корзину</a>
+                                <a href="{% url 'ProductList' %}">Продолжить шоппинг</a>
                             </div>
                             <div class="coupon">
-                                <h3>Coupon</h3>
-                                <p>Enter your coupon code if you have one.</p>
+                                <h3>Купон</h3>
+                                <p>Введите промокод, если он у вас есть</p>
                                 <form action="{% url 'ApplyCoupon' %}" method="post">{% csrf_token %}
                                     {{ form.code }}
-                                    <input type="submit" value="Apply Coupon" />
+                                    <input type="submit" value="Применить купон" />
                                 </form>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-5 col-xs-12">
                             <div class="cart_totals">
-                                <h2>Cart Totals</h2>
+                                <h2>Итого в корзине</h2>
                                 <table>
                                     <tbody>
 {#                                        <tr class="cart-subtotal">#}
-{#                                            <th>Subtotal</th>#}
-{#                                            <td><span class="amount">£{{ cart.get_total_price }}</span></td>#}
+{#                                            <th>Итого</th>#}
+{#                                            <td><span class="amount">₽{{ cart.get_total_price }}</span></td>#}
 {#                                        </tr>#}
                                         <tr class="shipping">
-                                            <th>Shipping</th>
+                                            <th>Доставка</th>
                                             <td>
                                                 <ul id="shipping_method">
                                                     <li>
 {#                                                        <input type="radio" />#}
 {#                                                        <label>#}
-{#                                                            Flat Rate: <span class="amount">£7.00</span>#}
+{#                                                            Ставка: <span class="amount">₽7.00</span>#}
 {#                                                        </label>#}
                                                     </li>
                                                     <li>
 {#                                                        <input type="radio" />#}
 {#                                                        <label>#}
-{#                                                            Free Shipping#}
+{#                                                            Бесплатная доставка#}
 {#                                                        </label>#}
 
                                                         {% if cart.get_coupon_in_cart %}
-                                                            <div><span>Discount: {{ cart.get_coupon_in_cart.discount }}%</span></div>
+                                                            <div><span>Скидка: {{ cart.get_coupon_in_cart.discount }}%</span></div>
                                                         {% endif %}
                                                     </li>
                                                     <li></li>
                                                 </ul>
-                                                <p><a class="shipping-calculator-button" href="#">Calculate Shipping</a></p>
+                                                <p><a class="shipping-calculator-button" href="#">Рассчитать доставку</a></p>
                                             </td>
                                         </tr>
                                         <tr class="order-total">
                                             <th>Total</th>
                                             <td>
                                                 {% if cart.get_coupon_in_cart %}
-                                                    <span class="old-price amount" style="color: grey;">£{{ cart.sum_cart }}</span>
-                                                    <strong><span class="new-price amount">£{{ cart.get_total_price }} </span></strong>
+                                                    <span class="old-price amount" style="color: grey;">₽{{ cart.sum_cart }}</span>
+                                                    <strong><span class="new-price amount">₽{{ cart.get_total_price }} </span></strong>
                                                 {% else %}
-                                                    <strong><span class="amount">£{{ cart.get_total_price }}</span></strong>
+                                                    <strong><span class="amount">₽{{ cart.get_total_price }}</span></strong>
                                                 {% endif %}
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <div class="wc-proceed-to-checkout">
-                                    <a href="{% url 'Checkout' %}">Proceed to Checkout</a>
+                                    <a href="{% url 'Checkout' %}">Перейти к оплате</a>
                                 </div>
                             </div>
                         </div>

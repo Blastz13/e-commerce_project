@@ -15,10 +15,10 @@
 			<div class="row">
 				<div class="col-md-12 col-sm-12">
 					<div class="shop-header-title">
-						<h1>Shop All Products</h1>
+						<h1>Все товары</h1>
 						<div class="shop-menu">
 							<ul>
-								<li><a href="/shop/list/">All</a></li>
+								<li><a href="/shop/list/">Все</a></li>
                                 {% recursetree all_category %}
                                     {% if node.is_root_node %}
                                         <li><a href="{{ node.get_absolute_url }}">{{ node.title }}</a></li>
@@ -48,7 +48,7 @@
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 					<!-- widget-categories start -->
 					<aside class="widget widget-categories" id="cssmenu">
-						<h3 class="sidebar-title">Categories</h3>
+						<h3 class="sidebar-title">Категории</h3>
 						<ul class="sidebar-menu" id="css-menu">
                           {% for node in all_category %}
                               {% if node.is_root_node %}
@@ -69,10 +69,10 @@
                           </div>
                           <div class="row slider-labels" style="margin-top: 15px;">
                             <div class="col-xs-6 caption">
-                              <strong>Min:</strong> <span id="slider-range-value1"></span>
+                              <strong>Мин:</strong> <span id="slider-range-value1"></span>
                             </div>
                             <div class="col-xs-6 text-right caption">
-                              <strong>Max:</strong> <span id="slider-range-value2"></span>
+                              <strong>Макс:</strong> <span id="slider-range-value2"></span>
                             </div>
                           </div>
                           <div class="row">
@@ -80,7 +80,7 @@
                               <form method='GET' class="">
                                 <input type="hidden" id="min-value" name="min-value" value="">
                                 <input type="hidden" id="max-value" name="max-value" value="">
-                               <input type="submit" value="Filter" style="margin-top: 15px;">
+                               <input type="submit" value="Фильтр" style="margin-top: 15px;">
                               </form>
                             </div>
                           </div>
@@ -103,17 +103,17 @@
 							<a class="active" href="/shop/list"><i class="fa fa-th-list"></i></a>
 						</div>
 						<div class="show-result">
-							<p> Showing {{ products_all.start_index }}–{{ products_all.end_index }} of {{ products_all.paginator.count }} results</p>
+							<p> Показано {{ products_all.start_index }}–{{ products_all.end_index }} из {{ products_all.paginator.count }} результатов</p>
 						</div>
 						<div class="toolbar-form">
 							<form action="#">
 								<div class="tolbar-select">
 									<select id="selectBox" onchange="changeFunc()">
-									  <option value="views">Sort by popularity</option>
-									  <option value="default">Default sorting</option>
-									  <option value="newness">Sort by newness</option>
-									  <option value="price">Sort by price: low to high</option>
-									  <option value="-price">Sort by price: high to low</option>
+									  <option value="views">По популярности/option>
+									  <option value="default">Стандартная</option>
+									  <option value="newness">По новизне/option>
+									  <option value="price">По цене: от дешевых к дорогим</option>
+									  <option value="-price">По цене: от дорогих к дешевым</option>
 									</select>
 								</div>
 							</form>								
@@ -133,7 +133,7 @@
                                                     <img class="primary-image" src="{% thumbnail product.preview_image 480x606 crop='smart' %}" alt="" />
                                                 </a>
                                                 {% if product.discount_price %}
-                                                    <span class="sale-text">Sale</span>
+                                                    <span class="sale-text">Скидка</span>
                                                 {% endif %}
                                             </div>
                                         </div>
@@ -142,10 +142,10 @@
                                                 <h2 class="product-name"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h2>
                                                 <div class="price-box">
                                                     {% if product.discount_price %}
-                                                        <span class="new-price">£{{ product.discount_price }}</span>
-                                                        <span class="old-price">£{{ product.price }}</span>
+                                                        <span class="new-price">₽{{ product.discount_price }}</span>
+                                                        <span class="old-price">₽{{ product.price }}</span>
                                                     {% else %}
-                                                        <span class="new-price">£{{ product.price }}</span>
+                                                        <span class="new-price">₽{{ product.price }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="product-desc">
@@ -209,7 +209,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="section-heading">
-						<h3>Our Brands</h3>
+						<h3>я не ебу</h3>
 						<div class="title-icon">
 							<span><i class="fa fa-angle-left"></i> <i class="fa fa-angle-right"></i></span>
 						</div>						
@@ -290,7 +290,7 @@ $(document).ready(function() {
   var moneyFormat = wNumb({
     decimals: 2,
     thousand: ',',
-    prefix: '£'
+    prefix: '₽'
   });
   var params = window
     .location

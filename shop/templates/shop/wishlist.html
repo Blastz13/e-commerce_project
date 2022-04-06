@@ -10,7 +10,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="entry-header">
-						<h1 class="entry-title">Wishlist</h1>
+						<h1 class="entry-title">Список желаний</h1>
 					</div>
 				</div>
 			</div>
@@ -27,12 +27,12 @@
 								<table>
 									<thead>
 										<tr>
-											<th class="product-remove"><span class="nobr">Remove</span></th>
-											<th class="product-thumbnail">Image</th>
-											<th class="product-name"><span class="nobr">Product Name</span></th>
-											<th class="product-price"><span class="nobr"> Unit Price </span></th>
-											<th class="product-stock-stauts"><span class="nobr"> Stock Status </span></th>
-											<th class="product-add-to-cart"><span class="nobr">Add To Cart </span></th>
+											<th class="product-remove"><span class="nobr">Удалить</span></th>
+											<th class="product-thumbnail">Изображение</th>
+											<th class="product-name"><span class="nobr">Название</span></th>
+											<th class="product-price"><span class="nobr"> Цена </span></th>
+											<th class="product-stock-stauts"><span class="nobr"> Статус </span></th>
+											<th class="product-add-to-cart"><span class="nobr">Добавить в корзину </span></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -42,13 +42,13 @@
 											<td class="product-remove"><form action="{% url 'del_product_to_wish_list' item.product_id %}" method="post">{% csrf_token %}<input type="submit" style="background: none; border: none;" value="&#10006;"></form></td>
 											<td class="product-thumbnail"><a href="{{ product.get_absolute_url }}"><img src="{% thumbnail product.preview_image 480x606 crop='smart' %}" alt="" /></a></td>
 											<td class="product-name"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></td>
-											<td class="product-price"><span class="amount">£{% if product.discount_price %}{{ product.discount_price }}{% else %}{{ product.price }}{% endif %}</span></td>
-											<td class="product-stock-status"><span class="wishlist-in-stock">{% if product.is_available %}In Stock{% else %}Not Available{% endif %}</span></td>
+											<td class="product-price"><span class="amount">₽{% if product.discount_price %}{{ product.discount_price }}{% else %}{{ product.price }}{% endif %}</span></td>
+											<td class="product-stock-status"><span class="wishlist-in-stock">{% if product.is_available %}В наличии{% else %}Нет в наличии{% endif %}</span></td>
 											<td class="product-add-to-cart">
                                                 <form action="{% url 'add_to_cart_alone_product' product.slug %}" method="post" class="add-to-cart-form">{% csrf_token %}
                                                     <input type="hidden" name="total_price" value="{% if product.discount_price %}{{ product.price }}{% else %}{{ product.price }}{% endif %}">
                                                     <input type="hidden" name="quantity" value="1">
-                                                    <input type="submit" value="Add to cart" id="add-to-cart-product">
+                                                    <input type="submit" value="Добавить в корзину" id="add-to-cart-product">
                                                 </form>
                                             </td>
 										</tr>
@@ -59,7 +59,7 @@
 										<tr>
 											<td colspan="6">
 												<div class="wishlist-share">
-													<h4 class="wishlist-share-title">Share on:</h4>
+													<h4 class="wishlist-share-title">Поделиться в:</h4>
 													<ul>
 														<li><a class="facebook" href="#"></a></li>
 														<li><a class="twitter" href="#"></a></li>

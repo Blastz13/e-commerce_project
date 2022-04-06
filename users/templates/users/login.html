@@ -6,7 +6,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="entry-header">
-						<h1 class="entry-title">My Account</h1>
+						<h1 class="entry-title">Мой Аккаунт</h1>
                         {% for message in messages %}
                             {{ message.tags }}
                             {{ message|safe }}
@@ -24,7 +24,7 @@
 				<div class="col-md-6">
 					<form action="{% url 'Account' %}" method="post">{% csrf_token %}
 						<div class="form-fields">
-							<h2>Login</h2>
+							<h2>Авторизация</h2>
                             {% for field in form_login %}
 							<p>
 								{{ field.label }}
@@ -36,7 +36,7 @@
                             {% endfor %}
 						</div>
 						<div class="form-action">
-							<p class="lost_password"><a href="#">Lost your password?</a></p>
+							<p class="lost_password"><a href="#">Забыли пароль?</a></p>
 							<input type="submit" value="Login" />
 						</div>
 					</form>
@@ -44,7 +44,7 @@
 				<div class="col-md-6">
 					<form action="{% url 'SignUp' %}" method="post">{% csrf_token %}
 						<div class="form-fields">
-							<h2>Register</h2>
+							<h2>Регистрация</h2>
 							{% for field in form_registration%}
                                 {% for error in field.errors %}
                                     <p style="color: red;">{{ error }}</p>

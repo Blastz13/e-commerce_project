@@ -39,17 +39,17 @@
     </div>
         <div class="col-md-5 col-sm-12 col-xs-12" style="margin-bottom: 15px;">
         <div>
-            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Number order: {{ order.id}}</span></div>
-            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Date order: {{ order.date_create }}</span></div>
-            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Is paid: {% if order.is_paid %} &#9989; {% else %} &#10060; {% endif %}</span></div>
-            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Is apply coupon: {% if order.coupon %} &#9989; {% else %} &#10060; {% endif %}</span></div>
-            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">City: {{ order.city }}</span></div>
-            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Address: {{ order.address }}</span></div>
-            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Phone: {{ order.phone }}</span></div>
-            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Notes: {{ order.order_notes }}</span></div>
-            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">First name: {{ order.buyer.first_name }}</span></div>
-            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Last name: {{ order.buyer.last_name }}</span></div>
-            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75); border-top: darkgray 1px solid;"><strong>Total amount: {{ order.total_amount }}</strong></span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Номер заказа: {{ order.id}}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Дата заказа: {{ order.date_create }}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Оплачен: {% if order.is_paid %} &#9989; {% else %} &#10060; {% endif %}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Применен купон: {% if order.coupon %} &#9989; {% else %} &#10060; {% endif %}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Город: {{ order.city }}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Адрес: {{ order.address }}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Телефон: {{ order.phone }}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Заметки: {{ order.order_notes }}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Имя: {{ order.buyer.first_name }}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75);">Фамилия: {{ order.buyer.last_name }}</span></div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: rgba(0,0,0,0.75); border-top: darkgray 1px solid;"><strong>Стоимость: {{ order.total_amount }}</strong></span></div>
         </div>
     </div></div>
 </div>
