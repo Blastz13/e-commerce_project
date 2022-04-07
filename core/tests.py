@@ -148,3 +148,17 @@ class TestModelFeed(TestCase):
         self.feed.delete()
         self.comment2.delete()
         self.comment1.delete()
+
+
+class TestModelsCategoryFeed(TestCase):
+    def setUp(self):
+        self.category = CategoryFeed.objects.create(title="HOT NEWS", slug="hot_news")
+
+    def test_get_absolute_url(self):
+        self.assertEqual(self.category.get_absolute_url(), '/blog/hot_news/')
+
+    def test_str(self):
+        self.assertEqual(str(self.category), "HOT NEWS")
+
+    def tearDown(self):
+        self.category.delete()
