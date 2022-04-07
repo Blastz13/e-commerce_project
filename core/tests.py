@@ -179,3 +179,20 @@ class TestModelTag(TestCase):
     def tearDown(self):
         self.tag.delete()
 
+
+class TestModelComment(TestCase):
+    def setUp(self):
+        self.category = CategoryFeed.objects.create(title="HOT NEWS", slug="hot_news")
+        self.feed = Feed.objects.create(title="New book", body="Lorem Ipsum", slug="new_book",
+                                        category=self.category, is_slider=True, is_publish=True, is_blog=True)
+        self.comment = Comment.objects.create(email="ivan_pupkin@mail.ru", name="Ivan", feed=self.feed)
+
+    def test_str(self):
+        """Test cast Comment to string"""
+        self.assertEqual(str(self.comment), "Science Fiction")
+
+    def tearDown(self):
+        self.category.delete()
+        self.feed.delete()
+        self.comment.delete()
+
