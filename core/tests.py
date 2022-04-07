@@ -1,7 +1,6 @@
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, Client
 from django.urls import reverse
-from .models import Feed, CategoryFeed, Comment, Tag, ContactForm, OurBrand
+from .models import Feed, CategoryFeed, Comment, Tag, ContactForm, OurBrand, ContactAddress
 
 
 class TestViewHomePage(TestCase):
@@ -30,7 +29,7 @@ class TestViewFeedDetail(TestCase):
         self.assertTemplateUsed(response, 'core/blog-post-img.html')
 
     def test_create_comment_post(self):
-        """Checking the creation of a news comment"""
+        """Checking the creation of a new comment"""
         response = self.client.post(self.feed.get_absolute_url(), data={
             "email": "ivan_pupkin@mail.ru",
             "name": "Ivan",
@@ -184,17 +183,34 @@ class TestModelTag(TestCase):
 
 
 class TestModelComment(TestCase):
-    def setUp(self):
+    def test_str(self):
+        """Test cast Comment to string"""
         self.category = CategoryFeed.objects.create(title="HOT NEWS", slug="hot_news")
         self.feed = Feed.objects.create(title="New book", body="Lorem Ipsum", slug="new_book",
                                         category=self.category, is_slider=True, is_publish=True, is_blog=True)
         self.comment = Comment.objects.create(email="ivan_pupkin@mail.ru", name="Ivan", feed=self.feed)
-
-    def test_str(self):
-        """Test cast Comment to string"""
         self.assertEqual(str(self.comment), "Ivan - New book")
 
-    def tearDown(self):
-        self.category.delete()
-        self.feed.delete()
-        self.comment.delete()
+
+class TestOurBrand(TestCase):
+    def test_str(self):
+        """Test cast Brand to string"""
+        self.brand = OurBrand.objects.create(title="Abibas")
+        self.assertEqual(str(self.brand), "Abibas")
+
+
+class TestContactForm(TestCase):
+    def test_str(self):
+        """Test cast ContactForm to string"""
+        self.email_message = ContactForm.objects.create(name="Ivan", email="ivan_pupkin@mail.ru", subject="THANKS!",
+                                                        message="Good luck!")
+        self.assertEqual(str(self.email_message), "ivan_pupkin@mail.ru - THANKS!")
+
+
+class TestContactAddress(TestCase):
+    def test_str(self):
+        """Test cast ContactAddress to string"""
+        self.contact_adress = ContactAddress.objects.create(title="Our contacts in Moscow",
+                                                            address="Prospect Vernadskogo,78", phone="+7-909-09-09",
+                                                            email="best_book_shop@mail.ru")
+        self.assertEqual(str(self.contact_adress), "Prospect Vernadskogo,78 - +7-909-09-09, best_book_shop@mail.ru")
