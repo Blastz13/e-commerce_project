@@ -142,3 +142,9 @@ class TestModelFeed(TestCase):
     def test_str(self):
         """Test cast Feed to string"""
         self.assertEqual(str(self.feed), "Hot news")
+
+    def tearDown(self):
+        self.category.delete()
+        self.feed.delete()
+        self.comment2.delete()
+        self.comment1.delete()
