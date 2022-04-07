@@ -162,3 +162,20 @@ class TestModelsCategoryFeed(TestCase):
 
     def tearDown(self):
         self.category.delete()
+
+
+class TestModelTag(TestCase):
+    def setUp(self):
+        self.tag = Tag.objects.create(title="Science Fiction", slug="science_fiction")
+
+    def test_get_absolute_url(self):
+        """Test geting url of Tag"""
+        self.assertEqual(self.tag.get_absolute_url(), '/blog/tag/science_fiction/')
+
+    def test_str(self):
+        """Test cast FeedCategory to string"""
+        self.assertEqual(str(self.tag), "Science Fiction")
+
+    def tearDown(self):
+        self.tag.delete()
+
