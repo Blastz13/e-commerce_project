@@ -1,7 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from .models import Feed, CategoryFeed, Comment, \
-                    Tag, ContactForm
+from .models import Feed, CategoryFeed, Comment, Tag, ContactForm
 
 
 class TestViewHomePage(TestCase):
@@ -122,3 +121,24 @@ class TestViewLeaveMessage(TestCase):
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(str(contact), "test@mail.ru - Test_Subject")
+
+
+class TestModelFeed(TestCase):
+    def setUp(self):
+        self.category = CategoryFeed.objects.create(title="HOT_NEWS", slug="hot_news")
+        self.feed = Feed.objects.create(title="Hot news", body="Lorem Ipsum", slug="hot_news",
+                                        category=self.category, is_slider=True, is_publish=True, is_blog=True)
+        self.comment1 = Comment.objects.create(email="test1@mail.ru", name="Test_User1", feed=self.feed)
+        self.comment2 = Comment.objects.create(email="test2@mail.ru", name="Test_User2", feed=self.feed)
+
+    def test_get_abolute_url(self):
+        """Test geting url of Feed"""
+        self.assertEqual(self.feed.get_absolute_url(), '/blog/hot_news/hot_news/')
+
+    def test_get_comment(self):
+        """Test getting comments in Feed"""
+        self.assertCountEqual({self.comment1, self.comment2}, self.feed.get_comments())
+
+    def test_str(self):
+        """Test cast Feed to string"""
+        self.assertEqual(str(self.feed), "Hot news")
