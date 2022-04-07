@@ -1,6 +1,7 @@
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, Client
 from django.urls import reverse
-from .models import Feed, CategoryFeed, Comment, Tag, ContactForm
+from .models import Feed, CategoryFeed, Comment, Tag, ContactForm, OurBrand
 
 
 class TestViewHomePage(TestCase):
@@ -150,14 +151,16 @@ class TestModelFeed(TestCase):
         self.comment1.delete()
 
 
-class TestModelsCategoryFeed(TestCase):
+class TestModelCategoryFeed(TestCase):
     def setUp(self):
         self.category = CategoryFeed.objects.create(title="HOT NEWS", slug="hot_news")
 
     def test_get_absolute_url(self):
+        """Test geting url of CategoryFeed"""
         self.assertEqual(self.category.get_absolute_url(), '/blog/hot_news/')
 
     def test_str(self):
+        """Test cast CategoryFeed to string"""
         self.assertEqual(str(self.category), "HOT NEWS")
 
     def tearDown(self):
@@ -173,7 +176,7 @@ class TestModelTag(TestCase):
         self.assertEqual(self.tag.get_absolute_url(), '/blog/tag/science_fiction/')
 
     def test_str(self):
-        """Test cast FeedCategory to string"""
+        """Test cast Tag to string"""
         self.assertEqual(str(self.tag), "Science Fiction")
 
     def tearDown(self):
@@ -189,10 +192,9 @@ class TestModelComment(TestCase):
 
     def test_str(self):
         """Test cast Comment to string"""
-        self.assertEqual(str(self.comment), "Science Fiction")
+        self.assertEqual(str(self.comment), "Ivan - New book")
 
     def tearDown(self):
         self.category.delete()
         self.feed.delete()
         self.comment.delete()
-
