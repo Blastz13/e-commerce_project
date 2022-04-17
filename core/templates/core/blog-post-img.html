@@ -9,8 +9,8 @@
 				<div class="col-md-12">
 					<div class="breadcrumb">
 						<ul>
-							<li><a href="{% url 'HomePage' %}">Home</a> <i class="fa fa-angle-right"></i></li>
-							<li><a href="{% url 'FeedList' %}">Blog</a> <i class="fa fa-angle-right"></i></li>
+							<li><a href="{% url 'HomePage' %}">Главная</a> <i class="fa fa-angle-right"></i></li>
+							<li><a href="{% url 'FeedList' %}">Блог</a> <i class="fa fa-angle-right"></i></li>
                             <li><a href="{{ feed.category.get_absolute_url }}">{{ feed.category }}</a> <i class="fa fa-angle-right"></i></li>
 							<li>{{ feed.title }}</li>
 						</ul>
@@ -29,10 +29,10 @@
 				<div class="col-lg-3 col-md-3">
 					<!-- widget-search start -->
 					<aside class="widget widget-search">
-						<h3 class="sidebar-title">Search</h3>
+						<h3 class="sidebar-title">Поиск</h3>
 						<form action="#">
 							<div class="widget-form">
-								<input type="text" placeholder="search" />
+								<input type="text" placeholder="Искать.." />
 								<button type="submit"><i class="fa fa-search"></i></button>
 							</div>
 						</form>
@@ -77,13 +77,13 @@
                                     <a href="#">{{ tag.title }}</a>{% if not forloop.last %}, {% endif %}
                                     {% endfor %}
 								</span>
-								<span><i class="fa fa-comments-o"></i> <a href="#">{{ feed.comments.count }} comments</a></span>
+								<span><i class="fa fa-comments-o"></i> <a href="#">{{ feed.comments.count }} Комментарии</a></span>
 							</div>
 							<div class="entry-content">
                                 {% autoescape off %} {{ feed.body }} {% endautoescape %}
 							</div>
 							<div class="social-sharing">
-								<h3>Share this post</h3>
+								<h3>Поделиться:</h3>
 								<div class="sharing-icon">
 									<a href="#" data-toggle="tooltip" title="Facebook"><i class="fa fa-facebook"></i></a>
 									<a href="#" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a>
@@ -95,7 +95,7 @@
 							<div class="author-info">
 								<div class="author-avatar"><img src="../../static/core/img/blog/avatar.png" alt="" /></div>
 								<div class="author-description">
-									<h2>About the Author: <a href="#">admin</a></h2>
+									<h2>Об авторе: <a href="#">admin</a></h2>
 								</div>
 							</div>
 						</div>
@@ -104,7 +104,7 @@
 					<div class="single-post-comments">
 						<div class="comments-area">
 							<div class="comments-heading">
-								<h3>{{ feed.comments.count }} comments</h3>
+								<h3>{{ feed.comments.count }} Комментарии</h3>
 							</div>
 							<div class="comments-list">
 								<ul>
@@ -118,7 +118,7 @@
                                                     <span>
                                                         <b><a href="#">{{ comment.name }}</a></b>
                                                         <span class="post-time">{{ comment.date_publicate|date:'N d, Y | G:i' }}</span>
-                                                        <a href="#form-add-comment" onclick="addReview('{{ comment.name }}', '{{ comment.id }}')">Reply</a>
+                                                        <a href="#form-add-comment" onclick="addReview('{{ comment.name }}', '{{ comment.id }}')">Ответить</a>
                                                     </span>
                                                     <p>{{ comment.text }}</p>
                                                 </div>
@@ -134,7 +134,7 @@
                                                             <span>
                                                                 <b><a href="#">{{ sup_comment.name }}</a></b>
                                                                 <span class="post-time">{{ sup_comment.date_publicate|date:'N d, Y | G:i' }}</span>
-                                                                <a href="#form-add-comment" onclick="addReview('{{ sup_comment.name }}', '{{ comment.id }}')">Reply</a>
+                                                                <a href="#form-add-comment" onclick="addReview('{{ sup_comment.name }}', '{{ comment.id }}')">Ответить</a>
                                                             </span>
                                                             <p>{{ sup_comment.text }}</p>
                                                         </div>
@@ -146,13 +146,13 @@
                             </div>
                         </div>
                             <div class="comment-respond">
-							<h3 class="comment-reply-title">Leave a Reply </h3>
-							<span class="email-notes">Your email address will not be published. Required fields are marked *</span>
+							<h3 class="comment-reply-title">Оставить ответ</h3>
+							<span class="email-notes">Ваш email не будет показан. Обязательные поля отмечены *</span>
 							<form action="{% url 'FeedDetail' feed.category.slug feed.slug %}" id="form-add-comment" method="post">{% csrf_token %}
 								<div class="row">
                                     <input type="hidden" name="parent" id="contactparent" value="">
 									<div class="col-md-4">
-										<p>Name *</p>
+										<p>Имя *</p>
 										{{ comment_form.name }}
 									</div>
 									<div class="col-md-4">
@@ -160,7 +160,7 @@
 										{{ comment_form.email }}
 									</div>
 									<div class="col-md-12 comment-form-comment">
-										<p>Website</p>
+										<p>Сайт</p>
 {#										<textarea id="message" cols="30" rows="10"></textarea>#}
                                         {{ comment_form.text }}
 										<input type="submit" value="Post Comment" />

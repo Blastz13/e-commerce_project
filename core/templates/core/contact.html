@@ -19,11 +19,11 @@
                                     <address>
                                     <ul>
                                         <li>
-                                            <i class="fa fa-map-marker"></i> <strong>Address</strong>
+                                            <i class="fa fa-map-marker"></i> <strong>Адрес</strong>
                                             <strong>{{ contact.address }}</strong>
                                         <li>
                                             {% if contact.phone %}
-                                                <i class="fa fa-envelope"></i> <strong>Phone</strong>
+                                                <i class="fa fa-envelope"></i> <strong>Телефон</strong>
                                                 <strong><a href="tel:{{ contact.phone }}">{{ contact.phone }}</a></strong>
                                             {% endif %}
                                         </li>
@@ -41,7 +41,7 @@
 				<!-- contact-info end -->
 				<div class="col-md-6 col-sm-12 col-xs-12" style="margin-top: 15px;">
 					<div class="contact-form">
-						<h3><i class="fa fa-envelope-o"></i> Leave a Message</h3>
+						<h3><i class="fa fa-envelope-o"></i> Оставить сообщение</h3>
 						<div class="row">
 							<form action="" method="POST">{% csrf_token %}
 								<div class="col-md-6 col-sm-6 col-xs-12">

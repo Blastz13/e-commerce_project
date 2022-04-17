@@ -8,8 +8,8 @@
 				<div class="col-md-12">
 					<div class="breadcrumb">
 						<ul>
-							<li><a href="{%  url 'HomePage' %}">Home</a> <i class="fa fa-angle-right"></i></li>
-							<li><a href="{%  url 'FeedList' %}">Blog</a> <i class="fa fa-angle-right"></i></li>
+							<li><a href="{%  url 'HomePage' %}">Главная</a> <i class="fa fa-angle-right"></i></li>
+							<li><a href="{%  url 'FeedList' %}">Блог</a> <i class="fa fa-angle-right"></i></li>
                             {% if obj_selected_category %}<li>{{ obj_selected_category.title }}<i class="fa fa-angle-right"></i></li>{% endif %}
 						</ul>
 					</div>
@@ -27,10 +27,10 @@
 				<div class="col-lg-3 col-md-3">
 					<!-- widget-search start -->
 					<aside class="widget widget-search">
-						<h3 class="sidebar-title">Search</h3>
+						<h3 class="sidebar-title">Поиск</h3>
 						<form action="#">
 							<div class="widget-form">
-								<input type="text" placeholder="search" />
+								<input type="text" placeholder="Искать.." />
 								<button type="submit"><i class="fa fa-search"></i></button>
 							</div>
 						</form>
@@ -75,10 +75,10 @@
                                 <h2><a href="#">{{ feed.title }}</a></h2>
                                 <div class="small-meta">
                                     <span><i class="fa fa-calendar"></i> {{ feed.date_published_from|date:'N d, Y' }}</span>
-                                    <a href="#"><i class="fa fa-comments-o"></i> {{ feed.comments.count }} comments</a>
+                                    <a href="#"><i class="fa fa-comments-o"></i> {{ feed.comments.count }} Комментарии</a>
                                 </div>
                                 <p>{% autoescape off %} {{ feed.body|truncatewords:20 }} {% endautoescape %}</p>
-                                <a class="readmore" href="{{ feed.get_absolute_url }}">read more</a>
+                                <a class="readmore" href="{{ feed.get_absolute_url }}">Узнать больше</a>
                             </div>
                         </article>
                         <!-- single-blog end -->
