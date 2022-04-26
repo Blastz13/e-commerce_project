@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+    web:
+       restart: always
+       build: .
+       volumes:
+           - .:/var/www/
+       env_file:
+         - .env.dev
+       ports:
+         - "8000:8000"
